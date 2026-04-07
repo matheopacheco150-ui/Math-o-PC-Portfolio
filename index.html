@@ -1,1775 +1,1323 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mathéo Pacheco‑Corvo – Portfolio Banque & Assurance</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio avancé de Mathéo Pacheco‑Corvo, futur alternant Licence Banque-Assurance." />
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-dark: #020617;
-      --bg-card: rgba(15, 23, 42, 0.94);
-      --accent: #4ade80;
-      --accent-strong: #22c55e;
-      --accent-soft: rgba(74, 222, 128, 0.18);
-      --accent-blue: #38bdf8;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.4);
-      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.95);
-      --radius-lg: 22px;
-      --radius-pill: 999px;
-      --glass: rgba(15, 23, 42, 0.86);
-      --transition-fast: 0.22s ease;
-      --transition-med: 0.4s ease;
-      --grid-gap: 1.75rem;
-      --blur-strong: 22px;
-    }
-
-    /* Mode clair */
-    :root.light {
-      --bg-dark: #f3f4f6;
-      --bg-card: rgba(255, 255, 255, 0.96);
-      --glass: rgba(255, 255, 255, 0.9);
-      --text-main: #020617;
-      --text-muted: #6b7280;
-      --border-subtle: rgba(148, 163, 184, 0.6);
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.18);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
-      color: var(--text-main);
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Background layers */
-    .background-layer {
-      position: fixed;
-      inset: 0;
-      z-index: -4;
-      background-image:
-        linear-gradient(120deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.85)),
-        url("https://images.pexels.com/photos/2102416/pexels-photo-2102416.jpeg");
-      background-size: cover;
-      background-position: center;
-      filter: saturate(1.1) contrast(1.05);
-      transform: translateY(0);
-      transition: transform 0.3s ease-out;
-    }
-
-    .noise-layer {
-      position: fixed;
-      inset: -50px;
-      z-index: -3;
-      opacity: 0.12;
-      pointer-events: none;
-      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      mix-blend-mode: soft-light;
-    }
-
-    .grid-layer {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background-image:
-        linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
-      background-size: 80px 80px;
-      opacity: 0.35;
-      mask-image: radial-gradient(circle at top, black 0, transparent 70%);
-    }
-
-    .orb {
-      position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 0, rgba(74, 222, 128, 0.8), transparent 60%);
-      filter: blur(40px);
-      opacity: 0.35;
-      z-index: -1;
-      top: -120px;
-      right: -80px;
-      pointer-events: none;
-    }
-
-    .orb-blue {
-      background: radial-gradient(circle at 30% 0, rgba(56, 189, 248, 0.8), transparent 60%);
-      top: auto;
-      bottom: -160px;
-      left: -120px;
-      opacity: 0.3;
-    }
-
-    /* Particules */
-    .particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: rgba(148, 163, 184, 0.7);
-      opacity: 0.4;
-      animation: floatParticle 18s linear infinite;
-    }
-
-    @keyframes floatParticle {
-      0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.6;
-      }
-      90% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-220px) translateX(40px);
-        opacity: 0;
-      }
-    }
-
-    /* Layout */
-    .page {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 32px 18px 64px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(var(--blur-strong));
-      background: linear-gradient(
-        to bottom,
-        rgba(15, 23, 42, 0.96),
-        rgba(15, 23, 42, 0.82),
-        transparent
-      );
-      padding: 14px 10px 10px;
-    }
-
-    :root.light header {
-      background: linear-gradient(
-        to bottom,
-        rgba(243, 244, 246, 0.96),
-        rgba(243, 244, 246, 0.9),
-        transparent
-      );
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 18px;
-      background: radial-gradient(circle at 20% 0, #4ade80, #22c55e 40%, #0f172a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #020617;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.55);
-      transform-style: preserve-3d;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .logo-mark:hover {
-      transform: translateY(-2px) rotateX(10deg) rotateY(-10deg);
-      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.75);
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .logo-text span:first-child {
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-family: "Space Grotesk", system-ui, sans-serif;
-    }
-
-    .logo-text span:last-child {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-main);
-    }
-
-    nav {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-      font-size: 0.85rem;
-    }
-
-    nav a {
-      padding: 7px 14px;
-      border-radius: var(--radius-pill);
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: var(--transition-fast);
-      position: relative;
-      overflow: hidden;
-      font-family: "Space Grotesk", system-ui, sans-serif;
-    }
-
-    nav a::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(74, 222, 128, 0.18), transparent 55%);
-      opacity: 0;
-      transition: var(--transition-fast);
-    }
-
-    nav a span {
-      position: relative;
-      z-index: 1;
-    }
-
-    nav a:hover {
-      color: var(--text-main);
-      border-color: rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    :root.light nav a:hover {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    nav a:hover::before {
-      opacity: 1;
-    }
-
-    .nav-cta {
-      border-color: rgba(74, 222, 128, 0.6);
-      color: var(--accent);
-      background: linear-gradient(120deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.02));
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25), 0 14px 35px rgba(22, 163, 74, 0.45);
-    }
-
-    .nav-cta:hover {
-      background: linear-gradient(120deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.06));
-      transform: translateY(-1px);
-    }
-
-    .theme-toggle {
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-muted);
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-      transition: var(--transition-fast);
-    }
-
-    :root.light .theme-toggle {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .theme-toggle span.icon {
-      font-size: 0.9rem;
-    }
-
-    .theme-toggle:hover {
-      color: var(--text-main);
-      border-color: rgba(148, 163, 184, 0.9);
-    }
-
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 2.5rem;
-      align-items: center;
-      margin-bottom: 3.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .hero-left {
-      position: relative;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 6px 12px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 1.1rem;
-      backdrop-filter: blur(12px);
-    }
-
-    :root.light .hero-badge {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .hero-badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.25);
-    }
-
-    .hero-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.4rem, 3.2vw, 3.1rem);
-      line-height: 1.1;
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-title span.highlight {
-      background: linear-gradient(120deg, #4ade80, #22c55e, #a3e635);
-      -webkit-background-clip: text;
-      color: transparent;
-      position: relative;
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-subtitle strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .typing {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      font-size: 0.9rem;
-      color: var(--accent-blue);
-      margin-bottom: 1rem;
-      min-height: 1.2em;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid var(--accent-blue);
-      animation: caret 0.8s steps(1) infinite;
-    }
-
-    @keyframes caret {
-      0%, 50% {
-        border-color: transparent;
-      }
-      51%, 100% {
-        border-color: var(--accent-blue);
-      }
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 1.6rem;
-    }
-
-    .tag {
-      padding: 5px 11px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(10px);
-    }
-
-    :root.light .tag {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .tag-accent {
-      border-color: rgba(74, 222, 128, 0.7);
-      color: var(--accent);
-      background: rgba(22, 163, 74, 0.12);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      align-items: center;
-      margin-bottom: 1.4rem;
-    }
-
-    .btn {
-      border-radius: var(--radius-pill);
-      padding: 10px 18px;
-      font-size: 0.9rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: var(--transition-med);
-      text-decoration: none;
-      font-family: "Space Grotesk", system-ui, sans-serif;
-    }
-
-    .btn-primary {
-      background: linear-gradient(120deg, #22c55e, #4ade80);
-      color: #020617;
-      font-weight: 600;
-      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.6);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px) translateX(1px);
-      box-shadow: 0 22px 55px rgba(22, 163, 74, 0.8);
-    }
-
-    .btn-ghost {
-      border-color: rgba(148, 163, 184, 0.6);
-      color: var(--text-muted);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    :root.light .btn-ghost {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .btn-ghost:hover {
-      color: var(--text-main);
-      border-color: rgba(148, 163, 184, 0.9);
-      background: rgba(15, 23, 42, 0.98);
-    }
-
-    :root.light .btn-ghost:hover {
-      background: #ffffff;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .hero-meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .hero-meta-label {
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.7rem;
-      color: rgba(148, 163, 184, 0.9);
-      font-family: "Space Grotesk", system-ui, sans-serif;
-    }
-
-    .hero-meta-value {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    /* Hero right card */
-    .hero-right {
-      position: relative;
-      perspective: 1200px;
-    }
-
-    .profile-card {
-      position: relative;
-      border-radius: 26px;
-      padding: 1.4rem 1.4rem 1.6rem;
-      background:
-        radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 55%),
-        var(--glass);
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-    }
-
-    :root.light .profile-card {
-      background:
-        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.12), transparent 55%),
-        var(--glass);
-    }
-
-    .profile-card:hover {
-      transform: rotateX(6deg) rotateY(-6deg) translateY(-4px);
-      box-shadow: 0 26px 70px rgba(15, 23, 42, 0.95);
-      border-color: rgba(74, 222, 128, 0.9);
-    }
-
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 24px;
-      background: radial-gradient(circle at 20% 0, #4ade80, #22c55e 40%, #0f172a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.9rem;
-      font-weight: 700;
-      color: #020617;
-      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
-      position: relative;
-    }
-
-    .avatar::after {
-      content: "";
-      position: absolute;
-      inset: -6px;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      opacity: 0.7;
-    }
-
-    .profile-info h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .profile-info p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .profile-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 0.3rem;
-    }
-
-    :root.light .profile-pill {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .profile-pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.9rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .profile-stat {
-      padding: 0.7rem 0.8rem;
-      border-radius: 18px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.8rem;
-    }
-
-    :root.light .profile-stat {
-      background: rgba(255, 255, 255, 0.96);
-    }
-
-    .profile-stat-label {
-      color: var(--text-muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .profile-stat-value {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .profile-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-    }
-
-    .profile-footer span strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .profile-badges {
-      display: flex;
-      gap: 0.4rem;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      padding: 3px 9px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    :root.light .badge {
-      background: rgba(255, 255, 255, 0.96);
-    }
-
-    .badge-green {
-      border-color: rgba(74, 222, 128, 0.7);
-      color: var(--accent);
-      background: rgba(22, 163, 74, 0.12);
-    }
-
-    .profile-orbit {
-      position: absolute;
-      inset: -40%;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.35);
-      opacity: 0.4;
-      pointer-events: none;
-      animation: orbit 18s linear infinite;
-    }
-
-    .profile-orbit-dot {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      top: 12%;
-      right: 18%;
-      box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.25);
-      animation: orbitDot 18s linear infinite;
-    }
-
-    @keyframes orbit {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes orbitDot {
-      from {
-        transform: rotate(0deg) translateX(0);
-      }
-      to {
-        transform: rotate(-360deg) translateX(0);
-      }
-    }
-
-    /* Sections */
-    section {
-      margin-bottom: 3.2rem;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(148, 163, 184, 0.9);
-      font-family: "Space Grotesk", system-ui, sans-serif;
-    }
-
-    .section-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 420px;
-    }
-
-    /* Grid cards */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--grid-gap);
-    }
-
-    .card {
-      border-radius: var(--radius-lg);
-      padding: 1.1rem 1.1rem 1.2rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-      transform: translateY(0);
-      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top, rgba(74, 222, 128, 0.18), transparent 55%);
-      opacity: 0;
-      transition: opacity var(--transition-med);
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .card:hover {
-      transform: translateY(-6px) translateX(1px);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
-      border-color: rgba(74, 222, 128, 0.7);
-      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.16), transparent 55%), var(--bg-card);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(148, 163, 184, 0.9);
-      margin-bottom: 0.4rem;
-      font-family: "Space Grotesk", system-ui, sans-serif;
-    }
-
-    .card-title {
-      font-size: 0.98rem;
-      font-weight: 500;
-      margin-bottom: 0.35rem;
-    }
-
-    .card-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .card-meta strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .card-list {
-      list-style: none;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .card-list li::before {
-      content: "• ";
-      color: var(--accent);
-    }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      padding-left: 1.4rem;
-      border-left: 1px solid rgba(148, 163, 184, 0.5);
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 0.8rem;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -1.4rem;
-      top: 0.3rem;
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 7px rgba(34, 197, 94, 0.25);
-    }
-
-    .timeline-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      margin-bottom: 0.1rem;
-    }
-
-    .timeline-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-meta strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .timeline-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--grid-gap);
-    }
-
-    .skill-pill {
-      border-radius: var(--radius-lg);
-      padding: 0.9rem 1rem;
-      border: 1px solid var(--border-subtle);
-      background: rgba(15, 23, 42, 0.9);
-      font-size: 0.82rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.9);
-    }
-
-    :root.light .skill-pill {
-      background: rgba(255, 255, 255, 0.96);
-    }
-
-    .skill-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(148, 163, 184, 0.9);
-      font-family: "Space Grotesk", system-ui, sans-serif;
-    }
-
-    .skill-main {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .skill-note {
-      color: var(--text-muted);
-      font-size: 0.78rem;
-    }
-
-    /* Contact */
-    .contact-card {
-      border-radius: 26px;
-      padding: 1.4rem 1.4rem 1.5rem;
-      background:
-        radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 55%),
-        var(--glass);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      box-shadow: var(--shadow-soft);
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 1.8rem;
-      align-items: center;
-    }
-
-    :root.light .contact-card {
-      background:
-        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 55%),
-        var(--glass);
-    }
-
-    .contact-text h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .contact-text p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 0.9rem;
-    }
-
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .contact-details span strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      font-size: 0.8rem;
-    }
-
-    .field label {
-      color: rgba(148, 163, 184, 0.9);
-    }
-
-    .field input,
-    .field textarea {
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 8px 10px;
-      color: var(--text-main);
-      font-family: inherit;
-      font-size: 0.85rem;
-      outline: none;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
-    }
-
-    :root.light .field input,
-    :root.light .field textarea {
-      background: rgba(255, 255, 255, 0.96);
-    }
-
-    .field input:focus,
-    .field textarea:focus {
-      border-color: rgba(74, 222, 128, 0.8);
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.5);
-      background: rgba(15, 23, 42, 0.98);
-      transform: translateY(-1px);
-    }
-
-    :root.light .field input:focus,
-    :root.light .field textarea:focus {
-      background: #ffffff;
-    }
-
-    .field textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-
-    footer {
-      margin-top: 2.4rem;
-      padding-top: 1.4rem;
-      border-top: 1px solid rgba(148, 163, 184, 0.4);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    footer span strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive */
-    @media (max-width: 960px) {
-      .hero,
-      .contact-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero-right {
-        order: -1;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-      }
-
-      .page {
-        padding-inline: 16px;
-      }
-
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .skills-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .contact-card {
-        padding: 1.1rem 1rem 1.3rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Portfolio – Mathéo Pacheco‑Corvo (Cyberpunk)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #050510;
+  --bg2: #0b0b1a;
+  --panel: rgba(10,10,30,0.9);
+  --neon-blue: #4f9dff;
+  --neon-purple: #b44bff;
+  --neon-pink: #ff4fd8;
+  --neon-cyan: #4dffe3;
+  --text: #f5f5ff;
+  --text-dim: #9a9ab8;
+  --border: rgba(120,130,255,0.45);
+  --glass: rgba(255,255,255,0.04);
+  --radius: 18px;
+  --shadow: 0 20px 60px rgba(0,0,0,0.8);
+  --transition: 0.35s ease;
+}
+
+/* Reset */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background: radial-gradient(circle at top,#181830 0,#050510 55%,#000 100%);
+  color:var(--text);
+  font-family:"Inter",system-ui,sans-serif;
+  overflow-x:hidden;
+}
+
+/* Background FX */
+.bg-grid{
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(120,130,255,0.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(120,130,255,0.12) 1px,transparent 1px);
+  background-size:80px 80px;
+  opacity:0.25;
+  z-index:-3;
+}
+.bg-orb{
+  position:fixed;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  filter:blur(40px);
+  opacity:0.4;
+  z-index:-4;
+}
+.bg-orb.blue{
+  background:radial-gradient(circle at 30% 0,var(--neon-blue),transparent 60%);
+  top:-120px;right:-80px;
+}
+.bg-orb.purple{
+  background:radial-gradient(circle at 30% 0,var(--neon-purple),transparent 60%);
+  bottom:-160px;left:-120px;
+}
+.bg-noise{
+  position:fixed;
+  inset:-40px;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.12;
+  mix-blend-mode:soft-light;
+  pointer-events:none;
+  z-index:-2;
+}
+.particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+}
+.particle{
+  position:absolute;
+  width:3px;height:3px;
+  border-radius:50%;
+  background:rgba(180,75,255,0.8);
+  opacity:0;
+  animation:float 18s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  10%{opacity:0.7}
+  90%{opacity:0.7}
+  100%{transform:translateY(-260px) translateX(40px);opacity:0}
+}
+
+/* Layout */
+.sidebar{
+  position:fixed;
+  top:0;left:0;
+  width:260px;
+  height:100vh;
+  background:linear-gradient(180deg,#050515,#050510);
+  border-right:1px solid rgba(255,255,255,0.08);
+  padding:32px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  z-index:10;
+}
+.sidebar-top{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+.brand{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.brand-title{
+  font-family:"Orbitron",sans-serif;
+  font-size:1.3rem;
+  letter-spacing:0.12em;
+  color:var(--neon-blue);
+  text-shadow:0 0 14px var(--neon-blue);
+}
+.brand-sub{
+  font-size:0.8rem;
+  color:var(--text-dim);
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+}
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.nav a{
+  text-decoration:none;
+  color:var(--text-dim);
+  font-size:0.9rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:6px 0;
+  position:relative;
+  transition:var(--transition);
+}
+.nav a::before{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--neon-purple),var(--neon-blue));
+  transition:var(--transition);
+}
+.nav a:hover{
+  color:var(--neon-pink);
+  text-shadow:0 0 10px var(--neon-pink);
+  transform:translateX(4px);
+}
+.nav a:hover::before{
+  width:40%;
+}
+.sidebar-bottom{
+  font-size:0.8rem;
+  color:var(--text-dim);
+}
+.sidebar-bottom strong{
+  color:var(--neon-cyan);
+}
+
+/* Main */
+main{
+  margin-left:260px;
+  padding:40px 40px 60px;
+}
+
+/* Hero */
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  padding:40px 0 60px;
+}
+.hero-left{
+  max-width:520px;
+}
+.hero-kicker{
+  font-size:0.8rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--neon-cyan);
+  margin-bottom:10px;
+}
+.hero-title{
+  font-family:"Orbitron",sans-serif;
+  font-size:2.3rem;
+  line-height:1.2;
+  margin-bottom:12px;
+}
+.hero-title span{
+  color:var(--neon-purple);
+  text-shadow:0 0 14px var(--neon-purple);
+}
+.hero-sub{
+  font-size:0.98rem;
+  color:var(--text-dim);
+  margin-bottom:14px;
+}
+.hero-sub strong{
+  color:var(--neon-blue);
+}
+.typing{
+  font-family:"Orbitron",sans-serif;
+  font-size:0.9rem;
+  color:var(--neon-cyan);
+  margin-bottom:18px;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:2px solid var(--neon-cyan);
+  animation:caret 0.8s steps(1) infinite;
+}
+@keyframes caret{
+  0%,50%{border-color:transparent}
+  51%,100%{border-color:var(--neon-cyan)}
+}
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+}
+.tag{
+  font-size:0.78rem;
+  padding:5px 10px;
+  border-radius:999px;
+  border:1px solid rgba(120,130,255,0.4);
+  background:rgba(10,10,30,0.9);
+  color:var(--text-dim);
+}
+.tag-accent{
+  border-color:rgba(180,75,255,0.7);
+  color:var(--neon-pink);
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:18px;
+}
+.btn{
+  border-radius:999px;
+  padding:9px 16px;
+  font-size:0.9rem;
+  border:1px solid transparent;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  text-decoration:none;
+  transition:var(--transition);
+}
+.btn-primary{
+  background:linear-gradient(120deg,var(--neon-purple),var(--neon-blue));
+  color:#050510;
+  font-weight:600;
+  box-shadow:0 16px 40px rgba(0,0,0,0.9);
+}
+.btn-primary:hover{
+  transform:translateY(-2px) translateX(1px);
+  box-shadow:0 22px 60px rgba(0,0,0,1);
+}
+.btn-ghost{
+  border-color:rgba(120,130,255,0.6);
+  color:var(--text-dim);
+  background:rgba(10,10,30,0.9);
+}
+.btn-ghost:hover{
+  color:var(--text);
+  border-color:var(--neon-blue);
+}
+.hero-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  font-size:0.8rem;
+  color:var(--text-dim);
+}
+.hero-meta-item{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.hero-meta-label{
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  font-size:0.7rem;
+  color:rgba(154,154,184,0.9);
+}
+.hero-meta-value{
+  color:var(--text);
+}
+
+/* Hero right card */
+.hero-right{
+  flex:1;
+  display:flex;
+  justify-content:flex-end;
+}
+.profile-card{
+  width:320px;
+  padding:20px 20px 22px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at top,var(--neon-purple) 0,transparent 55%),
+    radial-gradient(circle at bottom,var(--neon-blue) 0,transparent 55%),
+    var(--panel);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform 0.4s ease,box-shadow 0.4s ease,border-color 0.4s ease;
+}
+.profile-card:hover{
+  transform:rotateX(6deg) rotateY(-6deg) translateY(-4px);
+  box-shadow:0 26px 70px rgba(0,0,0,1);
+  border-color:var(--neon-pink);
+}
+.profile-glow{
+  position:absolute;
+  inset:-40%;
+  border-radius:999px;
+  border:1px dashed rgba(180,75,255,0.4);
+  opacity:0.5;
+  animation:orbit 18s linear infinite;
+}
+.profile-dot{
+  position:absolute;
+  width:10px;height:10px;
+  border-radius:50%;
+  background:var(--neon-cyan);
+  top:14%;right:18%;
+  box-shadow:0 0 0 8px rgba(77,255,227,0.3);
+  animation:orbitDot 18s linear infinite;
+}
+@keyframes orbit{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes orbitDot{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+.profile-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:14px;
+}
+.avatar{
+  width:70px;height:70px;
+  border-radius:50%;
+  background:radial-gradient(circle at 20% 0,var(--neon-blue),var(--neon-purple));
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Orbitron";font-size:1.9rem;color:#fff;
+  box-shadow:0 0 22px var(--neon-blue);
+  position:relative;
+}
+.avatar::after{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border-radius:inherit;
+  border:1px solid rgba(255,255,255,0.4);
+  opacity:0.7;
+}
+.profile-info h2{
+  font-size:1rem;
+  margin-bottom:4px;
+}
+.profile-info p{
+  font-size:0.8rem;
+  color:var(--text-dim);
+}
+.profile-pill{
+  margin-top:6px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 10px;
+  border-radius:999px;
+  border:1px solid rgba(120,130,255,0.6);
+  background:rgba(5,5,20,0.9);
+  font-size:0.75rem;
+  color:var(--text-dim);
+}
+.profile-pill-dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--neon-cyan);
+}
+.profile-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:12px;
+}
+.profile-stat{
+  padding:8px 9px;
+  border-radius:14px;
+  background:rgba(5,5,20,0.9);
+  border:1px solid rgba(120,130,255,0.5);
+  font-size:0.78rem;
+}
+.profile-stat-label{
+  color:var(--text-dim);
+  margin-bottom:2px;
+}
+.profile-stat-value{
+  color:var(--neon-cyan);
+  font-weight:600;
+}
+.profile-footer{
+  font-size:0.75rem;
+  color:var(--text-dim);
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:space-between;
+}
+.profile-footer strong{
+  color:var(--neon-pink);
+}
+
+/* Sections */
+section{
+  margin-bottom:40px;
+}
+.section-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  margin-bottom:18px;
+}
+.section-title{
+  font-family:"Orbitron";
+  font-size:1.1rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--neon-blue);
+  text-shadow:0 0 12px var(--neon-blue);
+}
+.section-sub{
+  font-size:0.9rem;
+  color:var(--text-dim);
+  max-width:420px;
+}
+
+/* Cards grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+.card{
+  border-radius:var(--radius);
+  padding:16px 16px 18px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  transform:translateY(0);
+  transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition),background var(--transition);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle at top,var(--neon-purple),transparent 55%);
+  opacity:0;
+  transition:opacity var(--transition);
+}
+.card-inner{position:relative;z-index:1}
+.card:hover{
+  transform:translateY(-6px) translateX(1px);
+  box-shadow:0 26px 70px rgba(0,0,0,1);
+  border-color:var(--neon-pink);
+  background:radial-gradient(circle at top,var(--neon-purple),transparent 55%),var(--glass);
+}
+.card:hover::before{opacity:0.4}
+.card-label{
+  font-size:0.75rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:4px;
+}
+.card-title{
+  font-size:0.98rem;
+  margin-bottom:4px;
+}
+.card-meta{
+  font-size:0.8rem;
+  color:var(--text-dim);
+  margin-bottom:6px;
+}
+.card-meta strong{color:var(--neon-cyan)}
+.card-list{
+  list-style:none;
+  font-size:0.8rem;
+  color:var(--text-dim);
+}
+.card-list li{margin-bottom:4px}
+.card-list li::before{
+  content:"• ";
+  color:var(--neon-pink);
+}
+
+/* Timeline formations */
+.timeline{
+  position:relative;
+  padding-left:18px;
+  border-left:1px solid rgba(120,130,255,0.6);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.timeline-item{
+  position:relative;
+  padding-left:8px;
+}
+.timeline-dot{
+  position:absolute;
+  left:-18px;top:4px;
+  width:10px;height:10px;
+  border-radius:50%;
+  background:var(--neon-cyan);
+  box-shadow:0 0 0 6px rgba(77,255,227,0.25);
+}
+.timeline-title{
+  font-size:0.95rem;
+  margin-bottom:2px;
+}
+.timeline-meta{
+  font-size:0.8rem;
+  color:var(--text-dim);
+  margin-bottom:4px;
+}
+.timeline-meta strong{color:var(--neon-blue)}
+.timeline-desc{
+  font-size:0.8rem;
+  color:var(--text-dim);
+}
+
+/* Skills */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.skill-pill{
+  border-radius:var(--radius);
+  padding:10px 12px;
+  border:1px solid var(--border);
+  background:rgba(5,5,20,0.9);
+  box-shadow:var(--shadow);
+  font-size:0.8rem;
+}
+.skill-label{
+  font-size:0.72rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:4px;
+}
+.skill-main{
+  color:var(--text);
+  margin-bottom:4px;
+}
+.skill-note{
+  color:var(--text-dim);
+  font-size:0.78rem;
+}
+.skill-bar{
+  margin-top:6px;
+}
+.skill-bar-track{
+  width:100%;
+  height:8px;
+  border-radius:999px;
+  background:#151528;
+  overflow:hidden;
+}
+.skill-bar-fill{
+  height:100%;
+  width:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--neon-purple),var(--neon-blue));
+  transition:width 1.4s ease-out;
+}
+
+/* Contact */
+.contact-card{
+  border-radius:22px;
+  padding:18px 18px 20px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+  gap:18px;
+}
+.contact-text p{
+  font-size:0.9rem;
+  color:var(--text-dim);
+  margin-bottom:8px;
+}
+.contact-details{
+  font-size:0.85rem;
+  color:var(--text-dim);
+}
+.contact-details span strong{color:var(--neon-cyan)}
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  font-size:0.8rem;
+}
+.field label{
+  color:var(--text-dim);
+}
+.field input,.field textarea{
+  border-radius:12px;
+  border:1px solid rgba(120,130,255,0.6);
+  background:#050515;
+  color:var(--text);
+  padding:7px 9px;
+  font-size:0.85rem;
+  outline:none;
+  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
+}
+.field input:focus,.field textarea:focus{
+  border-color:var(--neon-pink);
+  box-shadow:0 0 0 1px rgba(255,79,216,0.6);
+  transform:translateY(-1px);
+}
+.field textarea{min-height:70px;resize:vertical}
+
+/* Footer */
+footer{
+  margin-top:26px;
+  padding-top:14px;
+  border-top:1px solid rgba(120,130,255,0.4);
+  font-size:0.78rem;
+  color:var(--text-dim);
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+footer strong{color:var(--neon-cyan)}
+
+/* Scroll reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity 0.7s ease,transform 0.7s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Responsive */
+@media(max-width:960px){
+  .sidebar{position:static;width:100%;height:auto;flex-direction:row;align-items:center;padding:16px 20px}
+  .sidebar-top{flex-direction:row;align-items:center;gap:20px}
+  .sidebar-bottom{display:none}
+  main{margin-left:0;padding:20px}
+  .hero{flex-direction:column;align-items:flex-start}
+  .hero-right{width:100%;justify-content:flex-start}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contact-card{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:720px){
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .skills-grid{grid-template-columns:minmax(0,1fr)}
+}
+</style>
 </head>
 <body>
-  <div class="background-layer" id="bg-layer"></div>
-  <div class="noise-layer"></div>
-  <div class="grid-layer"></div>
-  <div class="orb"></div>
-  <div class="orb orb-blue"></div>
 
-  <div class="particles" id="particles"></div>
+<div class="bg-grid"></div>
+<div class="bg-orb blue"></div>
+<div class="bg-orb purple"></div>
+<div class="bg-noise"></div>
+<div class="particles" id="particles"></div>
 
-  <div class="page">
-    <header>
-      <div class="logo">
-        <div class="logo-mark">MP</div>
-        <div class="logo-text">
-          <span>Portfolio</span>
-          <span>Mathéo Pacheco‑Corvo</span>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="brand">
+      <div class="brand-title">MATHÉO<br>PACHECO‑CORVO</div>
+      <div class="brand-sub">BANQUE · ASSURANCE · RELATION CLIENT</div>
+    </div>
+    <nav class="nav">
+      <a href="#hero">Accueil</a>
+      <a href="#apropos">À propos</a>
+      <a href="#experiences">Expériences</a>
+      <a href="#formations">Formations</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="sidebar-bottom">
+    Alternance visée : <strong>Licence Banque‑Assurance 2026 / 2027</strong><br>
+    Basé à Troyes · mobilité Romilly‑sur‑Seine & Grand Est.
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+  <!-- HERO -->
+  <section id="hero" class="hero reveal">
+    <div class="hero-left">
+      <div class="hero-kicker">Alternance Banque‑Assurance 2026 / 2027</div>
+      <h1 class="hero-title">
+        Un profil <span>rigoureux</span> et <span>orienté client</span> pour votre agence.
+      </h1>
+      <p class="hero-sub">
+        Étudiant en <strong>2ᵉ année de BTS Banque</strong> à Troyes, je souhaite poursuivre en Licence
+        Banque‑Assurance en alternance afin de mettre à profit mes expériences en agence, mon sens du
+        relationnel et ma capacité d'adaptation au service de vos clients.
+      </p>
+      <div class="typing" id="typing"></div>
+
+      <div class="hero-tags">
+        <span class="tag tag-accent">BTS Banque – Lycée Chrestien de Troyes</span>
+        <span class="tag">Stages Société Générale Troyes Foch</span>
+        <span class="tag">Expérience SNCF Technicentre Romilly</span>
+        <span class="tag">Dirigeant & ancien coach de football</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Proposer une alternance <span>→</span></a>
+        <a href="#experiences" class="btn btn-ghost">Voir mon parcours</a>
+      </div>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Localisation</span>
+          <span class="hero-meta-value">Troyes & Romilly‑sur‑Seine (Grand Est)</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Disponibilité</span>
+          <span class="hero-meta-value">Rentrée 2026 – rythme à définir</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Contact direct</span>
+          <span class="hero-meta-value">07.83.26.74.21 · matheopacheco150@gmail.com</span>
         </div>
       </div>
-      <nav>
-        <a href="#apropos"><span>À propos</span></a>
-        <a href="#experiences"><span>Expériences</span></a>
-        <a href="#formations"><span>Formations</span></a>
-        <a href="#competences"><span>Compétences</span></a>
-        <a href="#contact" class="nav-cta"><span>Contact & alternance</span></a>
-        <button class="theme-toggle" id="theme-toggle" type="button">
-          <span class="icon" id="theme-icon">🌙</span>
-          <span id="theme-label">Mode sombre</span>
+    </div>
+
+    <div class="hero-right">
+      <div class="profile-card" id="profile-card">
+        <div class="profile-glow"></div>
+        <div class="profile-dot"></div>
+
+        <div class="profile-header">
+          <div class="avatar">M</div>
+          <div class="profile-info">
+            <h2>Mathéo Pacheco‑Corvo</h2>
+            <p>Futur alternant Licence Banque‑Assurance · Relation client & rigueur opérationnelle</p>
+            <div class="profile-pill">
+              <span class="profile-pill-dot"></span>
+              <span>Ouvert aux opportunités en agence bancaire</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-grid">
+          <div class="profile-stat">
+            <div class="profile-stat-label">Expérience bancaire</div>
+            <div class="profile-stat-value" data-counter="16">0 semaines</div>
+            <div style="font-size:0.72rem;color:var(--text-dim);">
+              Stages en agence Société Générale Troyes Foch (1ʳᵉ & 2ᵉ année BTS).
+            </div>
+          </div>
+          <div class="profile-stat">
+            <div class="profile-stat-label">Polyvalence</div>
+            <div class="profile-stat-value">Banque · SNCF · Vente</div>
+            <div style="font-size:0.72rem;color:var(--text-dim);">
+              Environnements variés, culture du terrain et du service.
+            </div>
+          </div>
+          <div class="profile-stat">
+            <div class="profile-stat-label">Soft skills</div>
+            <div class="profile-stat-value">Organisé & curieux</div>
+            <div style="font-size:0.72rem;color:var(--text-dim);">
+              Bon contact client, sens du collectif, adaptabilité.
+            </div>
+          </div>
+          <div class="profile-stat">
+            <div class="profile-stat-label">Engagement</div>
+            <div class="profile-stat-value">Dirigeant associatif</div>
+            <div style="font-size:0.72rem;color:var(--text-dim);">
+              Romilly Champagne Football Club · ancien coach niveau R2.
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-footer">
+          <span>Certification <strong>Pix</strong> · Permis <strong>B</strong> · Anglais & Espagnol niveau scolaire</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="apropos" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">À propos</h2>
+      <p class="section-sub">
+        Un parcours construit entre technique, relation client et engagement associatif, avec un objectif clair :
+        évoluer dans la banque et l'assurance en accompagnant les clients avec sérieux, pédagogie et proximité.
+      </p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Vision</div>
+          <h3 class="card-title">Accompagner dans la durée</h3>
+          <p class="card-meta">
+            Construire une relation de confiance avec chaque client, en expliquant clairement les solutions proposées.
+          </p>
+          <ul class="card-list">
+            <li>Écoute active et reformulation des besoins.</li>
+            <li>Explication pédagogique des produits.</li>
+            <li>Suivi régulier et sérieux des dossiers.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Profil</div>
+          <h3 class="card-title">Terrain & structuré</h3>
+          <p class="card-meta">
+            <strong>Banque, SNCF, vente, sport</strong> : des environnements exigeants qui m'ont appris la rigueur et le sens du service.
+          </p>
+          <ul class="card-list">
+            <li>Intégration rapide dans une équipe.</li>
+            <li>Aisance à l'oral avec les clients.</li>
+            <li>Gestion des imprévus avec calme.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Objectif</div>
+          <h3 class="card-title">Réussir ma Licence en alternance</h3>
+          <p class="card-meta">
+            Mettre mon énergie au service d'une agence pour <strong>apprendre</strong> et <strong>performer</strong>.
+          </p>
+          <ul class="card-list">
+            <li>Monter en compétence sur les produits Banque & Assurance.</li>
+            <li>Gagner en autonomie sur un portefeuille clients.</li>
+            <li>Être un relais fiable pour l'équipe.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- EXPÉRIENCES -->
+  <section id="experiences" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Expériences</h2>
+      <p class="section-sub">
+        Des expériences complémentaires qui m'ont permis de développer un sens aigu du service, de la rigueur
+        opérationnelle et de la relation client, en particulier en agence bancaire.
+      </p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Banque</div>
+          <h3 class="card-title">Stagiaire BTS Banque – 2ᵉ année</h3>
+          <p class="card-meta">
+            Société Générale Grand Est · Troyes Foch · <strong>Nov–Déc 2025 (6 semaines)</strong>
+          </p>
+          <ul class="card-list">
+            <li>Accueil et orientation des clients.</li>
+            <li>Participation aux entretiens de conseil.</li>
+            <li>Préparation de dossiers clients.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Banque</div>
+          <h3 class="card-title">Stagiaire BTS Banque – 1ʳᵉ année</h3>
+          <p class="card-meta">
+            Société Générale Grand Est · Troyes Foch · <strong>Mai–Juil 2025 (8 sem.) & Janv 2025 (2 sem.)</strong>
+          </p>
+          <ul class="card-list">
+            <li>Observation des missions quotidiennes d'agence.</li>
+            <li>Gestion de la relation client au guichet.</li>
+            <li>Appropriation des process et de la conformité.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Industrie & mobilité</div>
+          <h3 class="card-title">Agent SNCF – Intérim</h3>
+          <p class="card-meta">
+            Technicentre SNCF · Romilly‑sur‑Seine · <strong>Juil–Août 2025 (5 semaines)</strong>
+          </p>
+          <ul class="card-list">
+            <li>Respect strict des procédures.</li>
+            <li>Travail en équipe sur le terrain.</li>
+            <li>Gestion des contraintes de sécurité.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Vente</div>
+          <h3 class="card-title">Vente alimentaire</h3>
+          <p class="card-meta">
+            Dreams Donuts · Romilly‑sur‑Seine · <strong>Juin–Juil 2024</strong>
+          </p>
+          <ul class="card-list">
+            <li>Accueil, conseil et encaissement.</li>
+            <li>Gestion des flux en période d'affluence.</li>
+            <li>Première expérience concrète de la relation client.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Engagement</div>
+          <h3 class="card-title">Dirigeant & ancien coach</h3>
+          <p class="card-meta">
+            Romilly Champagne Football Club · Niveau R2
+          </p>
+          <ul class="card-list">
+            <li>Encadrement d'équipe et gestion de groupe.</li>
+            <li>Organisation et communication régulière.</li>
+            <li>Leadership et sens des responsabilités.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-label">Sport</div>
+          <h3 class="card-title">Pratique sportive</h3>
+          <p class="card-meta">
+            Tennis (classé 30) · Badminton (classé départemental)
+          </p>
+          <ul class="card-list">
+            <li>Persévérance et discipline.</li>
+            <li>Gestion de la pression.</li>
+            <li>Esprit de compétition sain.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FORMATIONS -->
+  <section id="formations" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Formations</h2>
+      <p class="section-sub">
+        Un parcours progressif, du bac technologique à la filière Banque, avec une volonté constante de monter
+        en compétence et de professionnaliser mon projet.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3 class="timeline-title">BTS Banque</h3>
+        <p class="timeline-meta">
+          Lycée Chrestien de Troyes · Troyes · <strong>2024 – 2026</strong>
+        </p>
+        <p class="timeline-desc">
+          Formation centrée sur la relation client, les produits bancaires, la réglementation et la gestion des
+          opérations en agence.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3 class="timeline-title">1ʳᵉ année CPGE TSI</h3>
+        <p class="timeline-meta">
+          Lycée Les Lombards · Troyes · <strong>2023 – 2024</strong>
+        </p>
+        <p class="timeline-desc">
+          Année en classe préparatoire scientifique, développant rigueur, capacité de travail et logique analytique.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3 class="timeline-title">Baccalauréat technologique STI2D</h3>
+        <p class="timeline-meta">
+          Lycée Joliot Curie · Romilly‑sur‑Seine · <strong>2023 – 2024</strong>
+        </p>
+        <p class="timeline-desc">
+          Approche technologique et scientifique, avec une forte dimension projet et travail en équipe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section id="competences" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Compétences</h2>
+      <p class="section-sub">
+        Un socle de compétences techniques et humaines, directement mobilisables en agence pour contribuer à la
+        satisfaction et à la fidélisation des clients.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-pill">
+        <div class="skill-label">Relation client</div>
+        <div class="skill-main">Écoute & accompagnement</div>
+        <div class="skill-note">Accueil, compréhension des besoins, reformulation, suivi.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="90"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-pill">
+        <div class="skill-label">Organisation</div>
+        <div class="skill-main">Rigueur & fiabilité</div>
+        <div class="skill-note">Respect des procédures, gestion des priorités, sérieux.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="88"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-pill">
+        <div class="skill-label">Engagement</div>
+        <div class="skill-main">Motivation & curiosité</div>
+        <div class="skill-note">Envie d'apprendre et de progresser en continu.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="95"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-pill">
+        <div class="skill-label">Digital</div>
+        <div class="skill-main">Certification Pix</div>
+        <div class="skill-note">Maîtrise des outils numériques et bureautiques.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="85"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-pill">
+        <div class="skill-label">Mobilité</div>
+        <div class="skill-main">Permis B</div>
+        <div class="skill-note">Déplacements faciles entre agences ou sites.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="100"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-pill">
+        <div class="skill-label">Langues</div>
+        <div class="skill-main">Anglais & Espagnol</div>
+        <div class="skill-note">Niveau scolaire, bases solides pour progresser.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="70"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-pill">
+        <div class="skill-label">Soft skills</div>
+        <div class="skill-main">Esprit d'équipe & leadership</div>
+        <div class="skill-note">Développés via le sport, le coaching et l'associatif.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="92"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-pill">
+        <div class="skill-label">Adaptabilité</div>
+        <div class="skill-main">Polyvalence des environnements</div>
+        <div class="skill-note">Banque, SNCF, vente, sport : ajustement rapide.</div>
+        <div class="skill-bar">
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill" data-skill="93"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Contact & alternance</h2>
+      <p class="section-sub">
+        Intégrer votre équipe serait pour moi une opportunité de progresser aux côtés de professionnels
+        expérimentés, tout en contribuant concrètement à vos objectifs et à la satisfaction de vos clients.
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-text">
+        <p><strong>Discutons de votre besoin en alternant.</strong></p>
+        <p>
+          Je suis disponible pour un entretien afin d'échanger sur vos attentes, le rythme d'alternance et la
+          manière dont je peux m'intégrer à votre agence.
+        </p>
+        <div class="contact-details">
+          <span><strong>Téléphone :</strong> 07.83.26.74.21</span><br>
+          <span><strong>Email :</strong> matheopacheco150@gmail.com</span><br>
+          <span><strong>Basé à :</strong> Troyes · mobilité Romilly‑sur‑Seine et Grand Est</span>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Sur un site en production, ce formulaire enverrait un email ou enregistrerait une demande de contact.');">
+        <div class="field">
+          <label for="nom">Nom & prénom</label>
+          <input id="nom" type="text" placeholder="Nom du recruteur / de l'agence" required>
+        </div>
+        <div class="field">
+          <label for="email">Email professionnel</label>
+          <input id="email" type="email" placeholder="exemple@banque.fr" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Expliquez votre besoin en alternant, vos attentes, vos dates..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:4px;width:max-content;">
+          Envoyer une intention de contact
         </button>
-      </nav>
-    </header>
+      </form>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <main>
-      <section class="hero">
-        <div class="hero-left reveal">
-          <div class="hero-badge">
-            <div class="hero-badge-dot"></div>
-            <span>Recherche d'alternance – Licence Banque & Assurance 2026 / 2027</span>
-          </div>
-          <h1 class="hero-title">
-            Construire une carrière solide en
-            <span class="highlight">Banque & Assurance</span>
-          </h1>
-          <p class="hero-subtitle">
-            Étudiant en <strong>2ᵉ année de BTS Banque</strong> à Troyes, je souhaite poursuivre en Licence
-            Banque‑Assurance en alternance pour mettre à profit mes expériences en agence, mon sens du
-            relationnel et ma rigueur au service de votre établissement.
-          </p>
+  <footer>
+    <span>Portfolio cyberpunk conçu pour mettre en valeur un profil d'<strong>alternant Banque‑Assurance</strong> complet et engagé.</span>
+    <span>Dernière mise à jour : <strong>2026</strong> · Version néon / futuriste.</span>
+  </footer>
+</main>
 
-          <div class="typing" id="typing"></div>
+<script>
+// Particules
+const particlesContainer = document.getElementById("particles");
+const particleCount = 40;
+for (let i = 0; i < particleCount; i++) {
+  const p = document.createElement("div");
+  p.className = "particle";
+  const size = Math.random() * 3 + 2;
+  p.style.width = size + "px";
+  p.style.height = size + "px";
+  p.style.left = Math.random() * 100 + "%";
+  p.style.bottom = Math.random() * 100 + "px";
+  p.style.animationDuration = 14 + Math.random() * 10 + "s";
+  p.style.animationDelay = -Math.random() * 20 + "s";
+  particlesContainer.appendChild(p);
+}
 
-          <div class="hero-tags">
-            <span class="tag tag-accent">BTS Banque – Lycée Chrestien de Troyes</span>
-            <span class="tag">Stages Société Générale Troyes Foch</span>
-            <span class="tag">Expérience SNCF Technicentre Romilly</span>
-            <span class="tag">Dirigeant & ancien coach de football</span>
-          </div>
-
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">
-              Discuter d'une alternance
-              <span>→</span>
-            </a>
-            <a href="#experiences" class="btn btn-ghost">
-              Voir mon parcours détaillé
-            </a>
-          </div>
-
-          <div class="hero-meta">
-            <div class="hero-meta-item">
-              <span class="hero-meta-label">Localisation</span>
-              <span class="hero-meta-value">Troyes & Romilly‑sur‑Seine (Grand Est)</span>
-            </div>
-            <div class="hero-meta-item">
-              <span class="hero-meta-label">Disponibilité</span>
-              <span class="hero-meta-value">Rentrée 2026 – rythme alternance à définir</span>
-            </div>
-            <div class="hero-meta-item">
-              <span class="hero-meta-label">Contact direct</span>
-              <span class="hero-meta-value">07.83.26.74.21 · matheopacheco150@gmail.com</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-right reveal">
-          <div class="profile-card" id="profile-card">
-            <div class="profile-orbit"></div>
-            <div class="profile-orbit-dot"></div>
-
-            <div class="profile-header">
-              <div class="avatar">M</div>
-              <div class="profile-info">
-                <h2>Mathéo Pacheco‑Corvo</h2>
-                <p>Futur alternant Licence Banque‑Assurance · Relation client & rigueur opérationnelle</p>
-                <div class="profile-pill">
-                  <span class="profile-pill-dot"></span>
-                  <span>Ouvert aux opportunités en agence bancaire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="profile-grid">
-              <div class="profile-stat">
-                <div class="profile-stat-label">Expérience bancaire</div>
-                <div class="profile-stat-value" data-counter="16">0 semaines</div>
-                <div style="font-size:0.75rem;color:var(--text-muted);">
-                  Stages en agence Société Générale Troyes Foch (1ʳᵉ & 2ᵉ année BTS).
-                </div>
-              </div>
-              <div class="profile-stat">
-                <div class="profile-stat-label">Polyvalence terrain</div>
-                <div class="profile-stat-value">Banque · SNCF · Vente</div>
-                <div style="font-size:0.75rem;color:var(--text-muted);">
-                  Technicentre SNCF & vente alimentaire (Dreams Donuts).
-                </div>
-              </div>
-              <div class="profile-stat">
-                <div class="profile-stat-label">Soft skills</div>
-                <div class="profile-stat-value">Organisé & curieux</div>
-                <div style="font-size:0.75rem;color:var(--text-muted);">
-                  Bon contact client, sens du collectif, adaptabilité.
-                </div>
-              </div>
-              <div class="profile-stat">
-                <div class="profile-stat-label">Engagement</div>
-                <div class="profile-stat-value">Dirigeant associatif</div>
-                <div style="font-size:0.75rem;color:var(--text-muted);">
-                  Romilly Champagne Football Club · ancien coach niveau R2.
-                </div>
-              </div>
-            </div>
-
-            <div class="profile-footer">
-              <span>
-                Certification <strong>Pix</strong> · Permis <strong>B</strong> · Anglais & Espagnol niveau scolaire
-              </span>
-              <div class="profile-badges">
-                <span class="badge badge-green">Relation client</span>
-                <span class="badge">Esprit d'équipe</span>
-                <span class="badge">Adaptabilité</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- À PROPOS -->
-      <section id="apropos" class="reveal">
-        <div class="section-header">
-          <h2 class="section-title">À propos</h2>
-          <p class="section-subtitle">
-            Un parcours construit entre technique, relation client et engagement associatif, avec un objectif clair :
-            évoluer dans la banque et l'assurance en accompagnant les clients avec sérieux, pédagogie et proximité.
-          </p>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Vision</div>
-              <h3 class="card-title">Accompagner les clients dans la durée</h3>
-              <p class="card-meta">
-                Une approche centrée sur l'écoute, la compréhension des besoins et la construction de solutions adaptées.
-              </p>
-              <ul class="card-list">
-                <li>Créer une relation de confiance durable avec chaque client.</li>
-                <li>Expliquer clairement les produits et leurs impacts au quotidien.</li>
-                <li>Allier rigueur réglementaire et proximité humaine.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Profil</div>
-              <h3 class="card-title">Un profil terrain, structuré et engagé</h3>
-              <p class="card-meta">
-                <strong>Banque, SNCF, vente, sport</strong> : des environnements variés qui m'ont appris la rigueur,
-                la gestion des imprévus et le sens du service.
-              </p>
-              <ul class="card-list">
-                <li>Habitué à m'intégrer rapidement dans une équipe.</li>
-                <li>À l'aise à l'oral, face à des clients comme en réunion.</li>
-                <li>Capable de gérer des situations variées avec calme et méthode.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Objectif</div>
-              <h3 class="card-title">Réussir ma Licence en alternance</h3>
-              <p class="card-meta">
-                Mettre mon énergie et mes compétences au service d'une agence pour <strong>apprendre</strong> et
-                <strong>performer</strong>.
-              </p>
-              <ul class="card-list">
-                <li>Monter en compétence sur les produits Banque & Assurance.</li>
-                <li>Gagner en autonomie sur la gestion d'un portefeuille clients.</li>
-                <li>Être un relais fiable pour l'équipe et les clients.</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- EXPÉRIENCES -->
-      <section id="experiences" class="reveal">
-        <div class="section-header">
-          <h2 class="section-title">Expériences professionnelles</h2>
-          <p class="section-subtitle">
-            Des expériences complémentaires qui m'ont permis de développer un sens aigu du service, de la rigueur
-            opérationnelle et de la relation client, en particulier en agence bancaire.
-          </p>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Banque</div>
-              <h3 class="card-title">Stagiaire BTS Banque – 2ᵉ année</h3>
-              <p class="card-meta">
-                Société Générale Grand Est · Agence Troyes Foch · <strong>Novembre – Décembre 2025 (6 semaines)</strong>
-              </p>
-              <ul class="card-list">
-                <li>Accueil et orientation des clients en agence.</li>
-                <li>Découverte et participation aux entretiens de conseil.</li>
-                <li>Contribution à la préparation de dossiers clients.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Banque</div>
-              <h3 class="card-title">Stagiaire BTS Banque – 1ʳᵉ année</h3>
-              <p class="card-meta">
-                Société Générale Grand Est · Agence Troyes Foch ·
-                <strong>Mai – Juillet 2025 (8 semaines) & Janvier 2025 (2 semaines)</strong>
-              </p>
-              <ul class="card-list">
-                <li>Observation des missions quotidiennes d'une agence.</li>
-                <li>Participation à la gestion de la relation client au guichet.</li>
-                <li>Appropriation des process internes et de la rigueur réglementaire.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Industrie & mobilité</div>
-              <h3 class="card-title">Agent SNCF – Intérim</h3>
-              <p class="card-meta">
-                Technicentre SNCF · Romilly‑sur‑Seine · <strong>Juillet – Août 2025 (5 semaines)</strong>
-              </p>
-              <ul class="card-list">
-                <li>Travail en environnement industriel exigeant et sécurisé.</li>
-                <li>Respect strict des procédures et des délais.</li>
-                <li>Esprit d'équipe et coordination sur le terrain.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Vente & relation client</div>
-              <h3 class="card-title">Vente alimentaire</h3>
-              <p class="card-meta">
-                Dreams Donuts · Romilly‑sur‑Seine · <strong>Juin – Juillet 2024</strong>
-              </p>
-              <ul class="card-list">
-                <li>Accueil, conseil et encaissement des clients.</li>
-                <li>Gestion des flux en période d'affluence.</li>
-                <li>Première expérience concrète de la relation client.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Engagement associatif</div>
-              <h3 class="card-title">Dirigeant & ancien coach</h3>
-              <p class="card-meta">
-                Romilly Champagne Football Club · Niveau R2
-              </p>
-              <ul class="card-list">
-                <li>Encadrement d'équipe et gestion de groupe.</li>
-                <li>Organisation, planification et communication régulière.</li>
-                <li>Développement du leadership et du sens des responsabilités.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-label">Sports</div>
-              <h3 class="card-title">Pratique sportive</h3>
-              <p class="card-meta">
-                Tennis (classé 30) · Badminton (classé départemental)
-              </p>
-              <ul class="card-list">
-                <li>Persévérance, discipline et goût de l'effort.</li>
-                <li>Gestion de la pression et des objectifs.</li>
-                <li>Esprit de compétition sain et constructif.</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- FORMATIONS -->
-      <section id="formations" class="reveal">
-        <div class="section-header">
-          <h2 class="section-title">Formations</h2>
-          <p class="section-subtitle">
-            Un parcours progressif, du bac technologique à la filière Banque, avec une volonté constante de monter
-            en compétence et de professionnaliser mon projet.
-          </p>
-        </div>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <h3 class="timeline-title">BTS Banque</h3>
-            <p class="timeline-meta">
-              Lycée Chrestien de Troyes · Troyes · <strong>2024 – 2026</strong>
-            </p>
-            <p class="timeline-desc">
-              Formation centrée sur la relation client, les produits bancaires, la réglementation et la gestion des
-              opérations en agence.
-            </p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <h3 class="timeline-title">1ʳᵉ année CPGE TSI</h3>
-            <p class="timeline-meta">
-              Lycée Les Lombards · Troyes · <strong>2023 – 2024</strong>
-            </p>
-            <p class="timeline-desc">
-              Année en classe préparatoire scientifique, développant rigueur, capacité de travail et logique
-              analytique.
-            </p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <h3 class="timeline-title">Baccalauréat technologique STI2D</h3>
-            <p class="timeline-meta">
-              Lycée Joliot Curie · Romilly‑sur‑Seine · <strong>2023 – 2024</strong>
-            </p>
-            <p class="timeline-desc">
-              Approche technologique et scientifique, avec une forte dimension projet et travail en équipe.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- COMPÉTENCES -->
-      <section id="competences" class="reveal">
-        <div class="section-header">
-          <h2 class="section-title">Compétences & qualités</h2>
-          <p class="section-subtitle">
-            Un socle de compétences techniques et humaines, directement mobilisables en agence pour contribuer à la
-            satisfaction et à la fidélisation des clients.
-          </p>
-        </div>
-
-        <div class="skills-grid">
-          <div class="skill-pill">
-            <span class="skill-label">Compétences clés</span>
-            <span class="skill-main">Relation client & écoute active</span>
-            <span class="skill-note">
-              Accueil, compréhension des besoins, reformulation et accompagnement dans la durée.
-            </span>
-          </div>
-
-          <div class="skill-pill">
-            <span class="skill-label">Organisation</span>
-            <span class="skill-main">Rigueur & fiabilité</span>
-            <span class="skill-note">
-              Respect des procédures, gestion des priorités, sérieux dans le suivi des dossiers.
-            </span>
-          </div>
-
-          <div class="skill-pill">
-            <span class="skill-label">Engagement</span>
-            <span class="skill-main">Motivation & curiosité</span>
-            <span class="skill-note">
-              Envie d'apprendre, de progresser et de comprendre en profondeur les produits et les enjeux.
-            </span>
-          </div>
-
-          <div class="skill-pill">
-            <span class="skill-label">Digital</span>
-            <span class="skill-main">Certification Pix</span>
-            <span class="skill-note">
-              Maîtrise des outils numériques, bureautique et environnement digital professionnel.
-            </span>
-          </div>
-
-          <div class="skill-pill">
-            <span class="skill-label">Mobilité</span>
-            <span class="skill-main">Permis B</span>
-            <span class="skill-note">
-              Capacité à me déplacer facilement entre agences ou sites si nécessaire.
-            </span>
-          </div>
-
-          <div class="skill-pill">
-            <span class="skill-label">Langues</span>
-            <span class="skill-main">Anglais & Espagnol (niveau scolaire)</span>
-            <span class="skill-note">
-              Bases solides pour échanger sur des sujets simples et progresser en contexte professionnel.
-            </span>
-          </div>
-
-          <div class="skill-pill">
-            <span class="skill-label">Soft skills</span>
-            <span class="skill-main">Esprit d'équipe & leadership</span>
-            <span class="skill-note">
-              Développés via le sport, le coaching et la gestion associative.
-            </span>
-          </div>
-
-          <div class="skill-pill">
-            <span class="skill-label">Adaptabilité</span>
-            <span class="skill-main">Polyvalence des environnements</span>
-            <span class="skill-note">
-              Banque, SNCF, vente, sport : capacité à m'ajuster rapidement aux contextes et aux attentes.
-            </span>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact" class="reveal">
-        <div class="section-header">
-          <h2 class="section-title">Contact & alternance</h2>
-          <p class="section-subtitle">
-            Intégrer votre équipe serait pour moi une opportunité de progresser aux côtés de professionnels
-            expérimentés, tout en contribuant concrètement à vos objectifs et à la satisfaction de vos clients.
-          </p>
-        </div>
-
-        <div class="contact-card">
-          <div class="contact-text">
-            <h3>Discutons de votre besoin en alternant</h3>
-            <p>
-              Je suis disponible pour un entretien afin d'échanger sur vos attentes, le rythme d'alternance et la
-              manière dont je peux m'intégrer à votre agence.
-            </p>
-            <div class="contact-details">
-              <span><strong>Téléphone :</strong> 07.83.26.74.21</span>
-              <span><strong>Email :</strong> matheopacheco150@gmail.com</span>
-              <span><strong>Basé à :</strong> Troyes · mobilité Romilly‑sur‑Seine et Grand Est</span>
-            </div>
-          </div>
-
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Sur un site en production, ce formulaire enverrait un email ou enregistrerait une demande de contact.');">
-            <div class="field">
-              <label for="nom">Nom & prénom</label>
-              <input id="nom" type="text" placeholder="Nom du recruteur / de l'agence" required />
-            </div>
-            <div class="field">
-              <label for="email">Email professionnel</label>
-              <input id="email" type="email" placeholder="exemple@banque.fr" required />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" placeholder="Expliquez votre besoin en alternant, vos attentes, vos dates..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:max-content;">
-              Envoyer une intention de contact
-            </button>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span>
-        Portfolio conçu pour mettre en valeur un profil d'<strong>alternant Banque‑Assurance</strong> complet, motivé et
-        opérationnel.
-      </span>
-      <span>
-        Dernière mise à jour : <strong>2026</strong> · Version portfolio HTML/CSS/JS avancée.
-      </span>
-    </footer>
-  </div>
-
-  <script>
-    // Particules
-    const particlesContainer = document.getElementById("particles");
-    const particleCount = 40;
-    for (let i = 0; i < particleCount; i++) {
-      const p = document.createElement("div");
-      p.className = "particle";
-      const size = Math.random() * 3 + 2;
-      p.style.width = size + "px";
-      p.style.height = size + "px";
-      p.style.left = Math.random() * 100 + "%";
-      p.style.bottom = Math.random() * 100 + "px";
-      p.style.animationDuration = 14 + Math.random() * 10 + "s";
-      p.style.animationDelay = -Math.random() * 20 + "s";
-      particlesContainer.appendChild(p);
+// Scroll reveal
+const reveals = document.querySelectorAll(".reveal");
+function handleScrollReveal() {
+  const triggerBottom = window.innerHeight * 0.85;
+  reveals.forEach((el, index) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < triggerBottom) {
+      setTimeout(() => el.classList.add("visible"), index * 80);
     }
+  });
+}
+window.addEventListener("scroll", handleScrollReveal);
+window.addEventListener("load", handleScrollReveal);
 
-    // Animation d'apparition au scroll
-    const reveals = document.querySelectorAll(".reveal");
-
-    function handleScrollReveal() {
-      const triggerBottom = window.innerHeight * 0.85;
-      reveals.forEach((el, index) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < triggerBottom) {
-          setTimeout(() => {
-            el.classList.add("visible");
-          }, index * 80);
-        }
-      });
+// Smooth scroll
+document.querySelectorAll('.nav a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", e => {
+    const id = anchor.getAttribute("href").substring(1);
+    const target = document.getElementById(id);
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({top: target.offsetTop - 40, behavior: "smooth"});
     }
+  });
+});
 
-    window.addEventListener("scroll", handleScrollReveal);
-    window.addEventListener("load", handleScrollReveal);
+// Typing effect
+const typingElement = document.getElementById("typing");
+const typingTexts = [
+  "Relation client, rigueur et engagement associatif au service de votre agence.",
+  "Objectif : réussir ma Licence Banque‑Assurance en alternance et devenir un conseiller de confiance.",
+  "Banque, SNCF, vente, sport : un profil polyvalent, orienté performance collective."
+];
+let typingIndex = 0;
+let charIndex = 0;
+let typingForward = true;
 
-    // Smooth scroll pour les ancres
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (e) {
-        const targetId = this.getAttribute("href").substring(1);
-        const target = document.getElementById(targetId);
-        if (target) {
-          e.preventDefault();
-          window.scrollTo({
-            top: target.offsetTop - 80,
-            behavior: "smooth"
-          });
-        }
-      });
+function type() {
+  const currentText = typingTexts[typingIndex];
+  if (typingForward) {
+    charIndex++;
+    if (charIndex === currentText.length + 5) {
+      typingForward = false;
+      setTimeout(type, 900);
+      return;
+    }
+  } else {
+    charIndex--;
+    if (charIndex === 0) {
+      typingForward = true;
+      typingIndex = (typingIndex + 1) % typingTexts.length;
+    }
+  }
+  typingElement.textContent = currentText.substring(0, charIndex);
+  setTimeout(type, typingForward ? 40 : 25);
+}
+window.addEventListener("load", () => setTimeout(type, 600));
+
+// Counter expérience bancaire
+const counterElement = document.querySelector("[data-counter]");
+let counterStarted = false;
+function animateCounter() {
+  if (!counterElement || counterStarted) return;
+  const rect = counterElement.getBoundingClientRect();
+  if (rect.top < window.innerHeight * 0.8) {
+    counterStarted = true;
+    const target = parseInt(counterElement.getAttribute("data-counter"), 10);
+    let current = 0;
+    const duration = 1200;
+    const startTime = performance.now();
+    function update(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      current = Math.floor(progress * target);
+      counterElement.textContent = current + " semaines";
+      if (progress < 1) requestAnimationFrame(update);
+      else counterElement.textContent = target + " semaines";
+    }
+    requestAnimationFrame(update);
+  }
+}
+window.addEventListener("scroll", animateCounter);
+window.addEventListener("load", animateCounter);
+
+// Skills bars
+const skillBars = document.querySelectorAll(".skill-bar-fill");
+let skillsStarted = false;
+function animateSkills() {
+  if (skillsStarted) return;
+  const anyVisible = Array.from(skillBars).some(bar => {
+    const rect = bar.getBoundingClientRect();
+    return rect.top < window.innerHeight * 0.85;
+  });
+  if (anyVisible) {
+    skillsStarted = true;
+    skillBars.forEach(bar => {
+      const val = bar.getAttribute("data-skill");
+      bar.style.width = val + "%";
     });
+  }
+}
+window.addEventListener("scroll", animateSkills);
+window.addEventListener("load", animateSkills);
 
-    // Effet de texte tapé
-    const typingElement = document.getElementById("typing");
-    const typingTexts = [
-      "Relation client, rigueur, engagement associatif : un profil complet pour votre agence.",
-      "Objectif : réussir ma Licence Banque‑Assurance en alternance et devenir un conseiller de confiance.",
-      "Banque, SNCF, vente, sport : des expériences variées au service de la performance collective."
-    ];
-    let typingIndex = 0;
-    let charIndex = 0;
-    let typingForward = true;
-
-    function type() {
-      const currentText = typingTexts[typingIndex];
-      if (typingForward) {
-        charIndex++;
-        if (charIndex === currentText.length + 5) {
-          typingForward = false;
-          setTimeout(type, 900);
-          return;
-        }
-      } else {
-        charIndex--;
-        if (charIndex === 0) {
-          typingForward = true;
-          typingIndex = (typingIndex + 1) % typingTexts.length;
-        }
-      }
-      typingElement.textContent = currentText.substring(0, charIndex);
-      setTimeout(type, typingForward ? 40 : 25);
-    }
-
-    window.addEventListener("load", () => {
-      setTimeout(type, 600);
-    });
-
-    // Parallax léger sur le background
-    const bgLayer = document.getElementById("bg-layer");
-    window.addEventListener("scroll", () => {
-      const offset = window.scrollY * 0.15;
-      bgLayer.style.transform = `translateY(${offset}px)`;
-    });
-
-    // Compteur animé sur l'expérience bancaire
-    const counterElement = document.querySelector("[data-counter]");
-    let counterStarted = false;
-
-    function animateCounter() {
-      if (!counterElement || counterStarted) return;
-      const rect = counterElement.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.8) {
-        counterStarted = true;
-        const target = parseInt(counterElement.getAttribute("data-counter"), 10);
-        let current = 0;
-        const duration = 1200;
-        const startTime = performance.now();
-
-        function updateCounter(now) {
-          const progress = Math.min((now - startTime) / duration, 1);
-          current = Math.floor(progress * target);
-          counterElement.textContent = current + " semaines";
-          if (progress < 1) {
-            requestAnimationFrame(updateCounter);
-          } else {
-            counterElement.textContent = target + " semaines";
-          }
-        }
-
-        requestAnimationFrame(updateCounter);
-      }
-    }
-
-    window.addEventListener("scroll", animateCounter);
-    window.addEventListener("load", animateCounter);
-
-    // Mode clair / sombre
-    const root = document.documentElement;
-    const themeToggle = document.getElementById("theme-toggle");
-    const themeIcon = document.getElementById("theme-icon");
-    const themeLabel = document.getElementById("theme-label");
-
-    function setTheme(mode) {
-      if (mode === "light") {
-        root.classList.add("light");
-        themeIcon.textContent = "☀️";
-        themeLabel.textContent = "Mode clair";
-      } else {
-        root.classList.remove("light");
-        themeIcon.textContent = "🌙";
-        themeLabel.textContent = "Mode sombre";
-      }
-      localStorage.setItem("theme-matheo", mode);
-    }
-
-    const savedTheme = localStorage.getItem("theme-matheo");
-    if (savedTheme === "light") {
-      setTheme("light");
-    }
-
-    themeToggle.addEventListener("click", () => {
-      if (root.classList.contains("light")) {
-        setTheme("dark");
-      } else {
-        setTheme("light");
-      }
-    });
-
-    // Tilt léger sur la carte profil (suivi souris)
-    const profileCard = document.getElementById("profile-card");
-    if (profileCard) {
-      profileCard.addEventListener("mousemove", (e) => {
-        const rect = profileCard.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * 6;
-        const rotateY = ((x - centerX) / centerX) * -6;
-        profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-      });
-
-      profileCard.addEventListener("mouseleave", () => {
-        profileCard.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0)";
-      });
-    }
-  </script>
+// Tilt léger sur la carte profil
+const profileCard = document.getElementById("profile-card");
+if (profileCard) {
+  profileCard.addEventListener("mousemove", e => {
+    const rect = profileCard.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * 6;
+    const rotateY = ((x - centerX) / centerX) * -6;
+    profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  });
+  profileCard.addEventListener("mouseleave", () => {
+    profileCard.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0)";
+  });
+}
+</script>
 </body>
 </html>
