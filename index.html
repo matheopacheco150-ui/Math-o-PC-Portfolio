@@ -1,1323 +1,1053 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Portfolio – Mathéo Pacheco‑Corvo (Cyberpunk)</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Mathéo Pacheco‑Corvo | Alternance Banque & Assurance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio de Mathéo Pacheco‑Corvo, candidat en alternance Licence Banque-Assurance, spécialisé relation client et conseil." />
+  <meta name="theme-color" content="#0b1b33" />
+  <style>
+    :root {
+      --bg-page: #f3f5fa;
+      --bg-card: #ffffff;
+      --bg-soft: #e4ebf7;
+      --primary: #0b5cff;
+      --primary-soft: rgba(11, 92, 255, 0.08);
+      --accent: #00a676;
+      --accent-soft: rgba(0, 166, 118, 0.08);
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-subtle: #e5e7eb;
+      --radius-lg: 18px;
+      --radius-xl: 22px;
+      --shadow-soft: 0 14px 40px rgba(15, 23, 42, 0.12);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, Consolas, "SF Mono";
+      --transition-fast: 0.2s ease-out;
+      --transition-med: 0.35s ease-out;
+    }
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-:root {
-  --bg: #050510;
-  --bg2: #0b0b1a;
-  --panel: rgba(10,10,30,0.9);
-  --neon-blue: #4f9dff;
-  --neon-purple: #b44bff;
-  --neon-pink: #ff4fd8;
-  --neon-cyan: #4dffe3;
-  --text: #f5f5ff;
-  --text-dim: #9a9ab8;
-  --border: rgba(120,130,255,0.45);
-  --glass: rgba(255,255,255,0.04);
-  --radius: 18px;
-  --shadow: 0 20px 60px rgba(0,0,0,0.8);
-  --transition: 0.35s ease;
-}
+    html, body {
+      height: 100%;
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #e0e7ff 0, #f3f5fa 40%, #e5e7eb 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
 
-/* Reset */
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  background: radial-gradient(circle at top,#181830 0,#050510 55%,#000 100%);
-  color:var(--text);
-  font-family:"Inter",system-ui,sans-serif;
-  overflow-x:hidden;
-}
+    body {
+      overflow-x: hidden;
+    }
 
-/* Background FX */
-.bg-grid{
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(120,130,255,0.12) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(120,130,255,0.12) 1px,transparent 1px);
-  background-size:80px 80px;
-  opacity:0.25;
-  z-index:-3;
-}
-.bg-orb{
-  position:fixed;
-  width:420px;
-  height:420px;
-  border-radius:50%;
-  filter:blur(40px);
-  opacity:0.4;
-  z-index:-4;
-}
-.bg-orb.blue{
-  background:radial-gradient(circle at 30% 0,var(--neon-blue),transparent 60%);
-  top:-120px;right:-80px;
-}
-.bg-orb.purple{
-  background:radial-gradient(circle at 30% 0,var(--neon-purple),transparent 60%);
-  bottom:-160px;left:-120px;
-}
-.bg-noise{
-  position:fixed;
-  inset:-40px;
-  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity:0.12;
-  mix-blend-mode:soft-light;
-  pointer-events:none;
-  z-index:-2;
-}
-.particles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-}
-.particle{
-  position:absolute;
-  width:3px;height:3px;
-  border-radius:50%;
-  background:rgba(180,75,255,0.8);
-  opacity:0;
-  animation:float 18s linear infinite;
-}
-@keyframes float{
-  0%{transform:translateY(0) translateX(0);opacity:0}
-  10%{opacity:0.7}
-  90%{opacity:0.7}
-  100%{transform:translateY(-260px) translateX(40px);opacity:0}
-}
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-/* Layout */
-.sidebar{
-  position:fixed;
-  top:0;left:0;
-  width:260px;
-  height:100vh;
-  background:linear-gradient(180deg,#050515,#050510);
-  border-right:1px solid rgba(255,255,255,0.08);
-  padding:32px 22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  z-index:10;
-}
-.sidebar-top{
-  display:flex;
-  flex-direction:column;
-  gap:28px;
-}
-.brand{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.brand-title{
-  font-family:"Orbitron",sans-serif;
-  font-size:1.3rem;
-  letter-spacing:0.12em;
-  color:var(--neon-blue);
-  text-shadow:0 0 14px var(--neon-blue);
-}
-.brand-sub{
-  font-size:0.8rem;
-  color:var(--text-dim);
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-}
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-.nav a{
-  text-decoration:none;
-  color:var(--text-dim);
-  font-size:0.9rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  padding:6px 0;
-  position:relative;
-  transition:var(--transition);
-}
-.nav a::before{
-  content:"";
-  position:absolute;
-  left:0;bottom:0;
-  width:0;
-  height:2px;
-  background:linear-gradient(90deg,var(--neon-purple),var(--neon-blue));
-  transition:var(--transition);
-}
-.nav a:hover{
-  color:var(--neon-pink);
-  text-shadow:0 0 10px var(--neon-pink);
-  transform:translateX(4px);
-}
-.nav a:hover::before{
-  width:40%;
-}
-.sidebar-bottom{
-  font-size:0.8rem;
-  color:var(--text-dim);
-}
-.sidebar-bottom strong{
-  color:var(--neon-cyan);
-}
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+      background: transparent;
+    }
 
-/* Main */
-main{
-  margin-left:260px;
-  padding:40px 40px 60px;
-}
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(243, 245, 250, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
 
-/* Hero */
-.hero{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
-  padding:40px 0 60px;
-}
-.hero-left{
-  max-width:520px;
-}
-.hero-kicker{
-  font-size:0.8rem;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
-  color:var(--neon-cyan);
-  margin-bottom:10px;
-}
-.hero-title{
-  font-family:"Orbitron",sans-serif;
-  font-size:2.3rem;
-  line-height:1.2;
-  margin-bottom:12px;
-}
-.hero-title span{
-  color:var(--neon-purple);
-  text-shadow:0 0 14px var(--neon-purple);
-}
-.hero-sub{
-  font-size:0.98rem;
-  color:var(--text-dim);
-  margin-bottom:14px;
-}
-.hero-sub strong{
-  color:var(--neon-blue);
-}
-.typing{
-  font-family:"Orbitron",sans-serif;
-  font-size:0.9rem;
-  color:var(--neon-cyan);
-  margin-bottom:18px;
-  white-space:nowrap;
-  overflow:hidden;
-  border-right:2px solid var(--neon-cyan);
-  animation:caret 0.8s steps(1) infinite;
-}
-@keyframes caret{
-  0%,50%{border-color:transparent}
-  51%,100%{border-color:var(--neon-cyan)}
-}
-.hero-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:18px;
-}
-.tag{
-  font-size:0.78rem;
-  padding:5px 10px;
-  border-radius:999px;
-  border:1px solid rgba(120,130,255,0.4);
-  background:rgba(10,10,30,0.9);
-  color:var(--text-dim);
-}
-.tag-accent{
-  border-color:rgba(180,75,255,0.7);
-  color:var(--neon-pink);
-}
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:18px;
-}
-.btn{
-  border-radius:999px;
-  padding:9px 16px;
-  font-size:0.9rem;
-  border:1px solid transparent;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  text-decoration:none;
-  transition:var(--transition);
-}
-.btn-primary{
-  background:linear-gradient(120deg,var(--neon-purple),var(--neon-blue));
-  color:#050510;
-  font-weight:600;
-  box-shadow:0 16px 40px rgba(0,0,0,0.9);
-}
-.btn-primary:hover{
-  transform:translateY(-2px) translateX(1px);
-  box-shadow:0 22px 60px rgba(0,0,0,1);
-}
-.btn-ghost{
-  border-color:rgba(120,130,255,0.6);
-  color:var(--text-dim);
-  background:rgba(10,10,30,0.9);
-}
-.btn-ghost:hover{
-  color:var(--text);
-  border-color:var(--neon-blue);
-}
-.hero-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:16px;
-  font-size:0.8rem;
-  color:var(--text-dim);
-}
-.hero-meta-item{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-}
-.hero-meta-label{
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  font-size:0.7rem;
-  color:rgba(154,154,184,0.9);
-}
-.hero-meta-value{
-  color:var(--text);
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-/* Hero right card */
-.hero-right{
-  flex:1;
-  display:flex;
-  justify-content:flex-end;
-}
-.profile-card{
-  width:320px;
-  padding:20px 20px 22px;
-  border-radius:22px;
-  background:
-    radial-gradient(circle at top,var(--neon-purple) 0,transparent 55%),
-    radial-gradient(circle at bottom,var(--neon-blue) 0,transparent 55%),
-    var(--panel);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
-  transform-style:preserve-3d;
-  transition:transform 0.4s ease,box-shadow 0.4s ease,border-color 0.4s ease;
-}
-.profile-card:hover{
-  transform:rotateX(6deg) rotateY(-6deg) translateY(-4px);
-  box-shadow:0 26px 70px rgba(0,0,0,1);
-  border-color:var(--neon-pink);
-}
-.profile-glow{
-  position:absolute;
-  inset:-40%;
-  border-radius:999px;
-  border:1px dashed rgba(180,75,255,0.4);
-  opacity:0.5;
-  animation:orbit 18s linear infinite;
-}
-.profile-dot{
-  position:absolute;
-  width:10px;height:10px;
-  border-radius:50%;
-  background:var(--neon-cyan);
-  top:14%;right:18%;
-  box-shadow:0 0 0 8px rgba(77,255,227,0.3);
-  animation:orbitDot 18s linear infinite;
-}
-@keyframes orbit{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes orbitDot{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
-.profile-header{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:14px;
-}
-.avatar{
-  width:70px;height:70px;
-  border-radius:50%;
-  background:radial-gradient(circle at 20% 0,var(--neon-blue),var(--neon-purple));
-  display:flex;align-items:center;justify-content:center;
-  font-family:"Orbitron";font-size:1.9rem;color:#fff;
-  box-shadow:0 0 22px var(--neon-blue);
-  position:relative;
-}
-.avatar::after{
-  content:"";
-  position:absolute;
-  inset:-5px;
-  border-radius:inherit;
-  border:1px solid rgba(255,255,255,0.4);
-  opacity:0.7;
-}
-.profile-info h2{
-  font-size:1rem;
-  margin-bottom:4px;
-}
-.profile-info p{
-  font-size:0.8rem;
-  color:var(--text-dim);
-}
-.profile-pill{
-  margin-top:6px;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:4px 10px;
-  border-radius:999px;
-  border:1px solid rgba(120,130,255,0.6);
-  background:rgba(5,5,20,0.9);
-  font-size:0.75rem;
-  color:var(--text-dim);
-}
-.profile-pill-dot{
-  width:7px;height:7px;
-  border-radius:50%;
-  background:var(--neon-cyan);
-}
-.profile-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin-bottom:12px;
-}
-.profile-stat{
-  padding:8px 9px;
-  border-radius:14px;
-  background:rgba(5,5,20,0.9);
-  border:1px solid rgba(120,130,255,0.5);
-  font-size:0.78rem;
-}
-.profile-stat-label{
-  color:var(--text-dim);
-  margin-bottom:2px;
-}
-.profile-stat-value{
-  color:var(--neon-cyan);
-  font-weight:600;
-}
-.profile-footer{
-  font-size:0.75rem;
-  color:var(--text-dim);
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:space-between;
-}
-.profile-footer strong{
-  color:var(--neon-pink);
-}
+    .brand-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0b5cff, #00a676);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 0 0 3px #e5edff;
+    }
 
-/* Sections */
-section{
-  margin-bottom:40px;
-}
-.section-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:16px;
-  margin-bottom:18px;
-}
-.section-title{
-  font-family:"Orbitron";
-  font-size:1.1rem;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--neon-blue);
-  text-shadow:0 0 12px var(--neon-blue);
-}
-.section-sub{
-  font-size:0.9rem;
-  color:var(--text-dim);
-  max-width:420px;
-}
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
 
-/* Cards grid */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
-}
-.card{
-  border-radius:var(--radius);
-  padding:16px 16px 18px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
-  transform:translateY(0);
-  transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition),background var(--transition);
-}
-.card::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background:radial-gradient(circle at top,var(--neon-purple),transparent 55%);
-  opacity:0;
-  transition:opacity var(--transition);
-}
-.card-inner{position:relative;z-index:1}
-.card:hover{
-  transform:translateY(-6px) translateX(1px);
-  box-shadow:0 26px 70px rgba(0,0,0,1);
-  border-color:var(--neon-pink);
-  background:radial-gradient(circle at top,var(--neon-purple),transparent 55%),var(--glass);
-}
-.card:hover::before{opacity:0.4}
-.card-label{
-  font-size:0.75rem;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--text-dim);
-  margin-bottom:4px;
-}
-.card-title{
-  font-size:0.98rem;
-  margin-bottom:4px;
-}
-.card-meta{
-  font-size:0.8rem;
-  color:var(--text-dim);
-  margin-bottom:6px;
-}
-.card-meta strong{color:var(--neon-cyan)}
-.card-list{
-  list-style:none;
-  font-size:0.8rem;
-  color:var(--text-dim);
-}
-.card-list li{margin-bottom:4px}
-.card-list li::before{
-  content:"• ";
-  color:var(--neon-pink);
-}
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
 
-/* Timeline formations */
-.timeline{
-  position:relative;
-  padding-left:18px;
-  border-left:1px solid rgba(120,130,255,0.6);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-.timeline-item{
-  position:relative;
-  padding-left:8px;
-}
-.timeline-dot{
-  position:absolute;
-  left:-18px;top:4px;
-  width:10px;height:10px;
-  border-radius:50%;
-  background:var(--neon-cyan);
-  box-shadow:0 0 0 6px rgba(77,255,227,0.25);
-}
-.timeline-title{
-  font-size:0.95rem;
-  margin-bottom:2px;
-}
-.timeline-meta{
-  font-size:0.8rem;
-  color:var(--text-dim);
-  margin-bottom:4px;
-}
-.timeline-meta strong{color:var(--neon-blue)}
-.timeline-desc{
-  font-size:0.8rem;
-  color:var(--text-dim);
-}
+    .brand-role {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
 
-/* Skills */
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:18px;
-}
-.skill-pill{
-  border-radius:var(--radius);
-  padding:10px 12px;
-  border:1px solid var(--border);
-  background:rgba(5,5,20,0.9);
-  box-shadow:var(--shadow);
-  font-size:0.8rem;
-}
-.skill-label{
-  font-size:0.72rem;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--text-dim);
-  margin-bottom:4px;
-}
-.skill-main{
-  color:var(--text);
-  margin-bottom:4px;
-}
-.skill-note{
-  color:var(--text-dim);
-  font-size:0.78rem;
-}
-.skill-bar{
-  margin-top:6px;
-}
-.skill-bar-track{
-  width:100%;
-  height:8px;
-  border-radius:999px;
-  background:#151528;
-  overflow:hidden;
-}
-.skill-bar-fill{
-  height:100%;
-  width:0;
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--neon-purple),var(--neon-blue));
-  transition:width 1.4s ease-out;
-}
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-/* Contact */
-.contact-card{
-  border-radius:22px;
-  padding:18px 18px 20px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  display:grid;
-  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
-  gap:18px;
-}
-.contact-text p{
-  font-size:0.9rem;
-  color:var(--text-dim);
-  margin-bottom:8px;
-}
-.contact-details{
-  font-size:0.85rem;
-  color:var(--text-dim);
-}
-.contact-details span strong{color:var(--neon-cyan)}
-.contact-form{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-  font-size:0.8rem;
-}
-.field label{
-  color:var(--text-dim);
-}
-.field input,.field textarea{
-  border-radius:12px;
-  border:1px solid rgba(120,130,255,0.6);
-  background:#050515;
-  color:var(--text);
-  padding:7px 9px;
-  font-size:0.85rem;
-  outline:none;
-  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
-}
-.field input:focus,.field textarea:focus{
-  border-color:var(--neon-pink);
-  box-shadow:0 0 0 1px rgba(255,79,216,0.6);
-  transform:translateY(-1px);
-}
-.field textarea{min-height:70px;resize:vertical}
+    nav a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: var(--transition-fast);
+      position: relative;
+    }
 
-/* Footer */
-footer{
-  margin-top:26px;
-  padding-top:14px;
-  border-top:1px solid rgba(120,130,255,0.4);
-  font-size:0.78rem;
-  color:var(--text-dim);
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-}
-footer strong{color:var(--neon-cyan)}
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 3px;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 999px;
+      transform: translateX(-50%);
+      transition: width 0.2s ease-out;
+    }
 
-/* Scroll reveal */
-.reveal{
-  opacity:0;
-  transform:translateY(18px);
-  transition:opacity 0.7s ease,transform 0.7s ease;
-}
-.reveal.visible{
-  opacity:1;
-  transform:translateY(0);
-}
+    nav a:hover {
+      color: var(--primary);
+    }
 
-/* Responsive */
-@media(max-width:960px){
-  .sidebar{position:static;width:100%;height:auto;flex-direction:row;align-items:center;padding:16px 20px}
-  .sidebar-top{flex-direction:row;align-items:center;gap:20px}
-  .sidebar-bottom{display:none}
-  main{margin-left:0;padding:20px}
-  .hero{flex-direction:column;align-items:flex-start}
-  .hero-right{width:100%;justify-content:flex-start}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .contact-card{grid-template-columns:minmax(0,1fr)}
-}
-@media(max-width:720px){
-  .grid{grid-template-columns:minmax(0,1fr)}
-  .skills-grid{grid-template-columns:minmax(0,1fr)}
-}
-</style>
+    nav a:hover::after {
+      width: 60%;
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+    }
+
+    .nav-cta span {
+      font-size: 1rem;
+    }
+
+    /* HERO GRID */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .card-pill {
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      white-space: nowrap;
+    }
+
+    /* HERO CONTENT */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-topline {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--primary);
+    }
+
+    .hero-name {
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .hero-name span {
+      color: var(--primary);
+    }
+
+    .hero-role {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hero-role-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero-typewriter {
+      border-right: 2px solid var(--accent);
+      padding-right: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .hero-subtext {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .hero-subtext strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .metric {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .metric span {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: var(--transition-med);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-ghost {
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .btn-ghost:hover {
+      background: var(--primary-soft);
+    }
+
+    .btn-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    /* SIDE CARD */
+    .side-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+
+    .contact-item {
+      padding: 8px 10px;
+      border-radius: var(--radius-lg);
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+    }
+
+    .contact-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .contact-value {
+      font-size: 0.85rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(0, 166, 118, 0.25);
+    }
+
+    /* SECTIONS INFÉRIEURES */
+    .sections {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 18px;
+      margin-top: 4px;
+    }
+
+    .section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section-title-main {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 16px;
+      margin-top: 4px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(37, 99, 235, 0.7), rgba(148, 163, 184, 0.1));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 9px 10px 9px 12px;
+      border-radius: var(--radius-lg);
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      margin-bottom: 8px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 12px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+    }
+
+    .timeline-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+      flex-wrap: wrap;
+    }
+
+    .timeline-role {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .timeline-org {
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+
+    .chip-strong {
+      background: var(--primary-soft);
+      border-color: rgba(37, 99, 235, 0.4);
+      color: var(--primary);
+    }
+
+    .badge-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .badge-item {
+      padding: 8px 10px;
+      border-radius: var(--radius-lg);
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-tag {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(0, 166, 118, 0.25);
+    }
+
+    .motivation-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+
+    .motivation-text strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+
+    /* ANIMATIONS SCROLL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .page {
+        padding: 12px 12px 24px;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 16px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      nav a,
+      .nav-cta {
+        padding: 6px 10px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sections {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 16px;
+        border-radius: 18px;
+      }
+
+      .timeline {
+        padding-left: 12px;
+      }
+
+      .timeline-item {
+        padding: 9px 9px 9px 11px;
+      }
+
+      .timeline-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-avatar">M</div>
+          <div class="brand-text">
+            <div class="brand-name">Mathéo Pacheco‑Corvo</div>
+            <div class="brand-role">Candidat alternance · Banque & Assurance</div>
+          </div>
+        </div>
+        <nav>
+          <a href="#profil">Profil</a>
+          <a href="#experience">Expérience</a>
+          <a href="#formation">Formation</a>
+          <a href="#competences">Compétences</a>
+          <a href="#recruteur">Synthèse</a>
+          <a class="nav-cta" href="#contact">
+            Me contacter
+            <span>➜</span>
+          </a>
+        </nav>
+      </div>
+    </header>
 
-<div class="bg-grid"></div>
-<div class="bg-orb blue"></div>
-<div class="bg-orb purple"></div>
-<div class="bg-noise"></div>
-<div class="particles" id="particles"></div>
+    <!-- HERO -->
+    <section class="hero-grid">
+      <article class="card reveal" id="profil">
+        <div class="card-header">
+          <div class="card-title">Profil</div>
+          <div class="card-pill">Alternance Licence Banque‑Assurance 2026‑2027</div>
+        </div>
+        <div class="hero">
+          <div class="hero-topline">Grand Est · Troyes</div>
+          <h1 class="hero-name">
+            Mathéo <span>Pacheco‑Corvo</span>
+          </h1>
+          <div class="hero-role">
+            <span class="hero-role-dot"></span>
+            <span class="hero-typewriter" id="typewriter"></span>
+          </div>
+          <p class="hero-subtext">
+            Actuellement en <strong>2ᵉ année de BTS Banque</strong> au lycée Chrestien de Troyes, je recherche une
+            <strong>alternance en Licence Banque‑Assurance</strong> pour la rentrée 2026‑2027. Mes stages à la
+            <strong>Société Générale Troyes Foch</strong> et mes engagements associatifs m’ont permis de développer
+            une <strong>relation client structurée, rigoureuse et orientée satisfaction</strong>.
+          </p>
+          <div class="hero-metrics">
+            <div class="metric"><span>3</span> stages en agence bancaire</div>
+            <div class="metric"><span>+</span> expérience SNCF & vente</div>
+            <div class="metric"><span>Association</span> dirigeant & ancien coach</div>
+          </div>
+          <div class="hero-actions">
+            <!-- Remplace les href par tes vrais fichiers -->
+            <a class="btn btn-primary" href="CV_Matheo_Pacheco_Corvo.pdf" download>
+              <span class="btn-icon">⬇</span>
+              Télécharger mon CV
+            </a>
+            <a class="btn btn-ghost" href="Lettre_Motivation_Matheo_Pacheco_Corvo.pdf" download>
+              <span class="btn-icon">✉</span>
+              Lettre de motivation
+            </a>
+          </div>
+        </div>
+      </article>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar-top">
-    <div class="brand">
-      <div class="brand-title">MATHÉO<br>PACHECO‑CORVO</div>
-      <div class="brand-sub">BANQUE · ASSURANCE · RELATION CLIENT</div>
-    </div>
-    <nav class="nav">
-      <a href="#hero">Accueil</a>
-      <a href="#apropos">À propos</a>
-      <a href="#experiences">Expériences</a>
-      <a href="#formations">Formations</a>
-      <a href="#competences">Compétences</a>
-      <a href="#contact">Contact</a>
-    </nav>
+      <aside class="card reveal" id="contact">
+        <div class="card-header">
+          <div class="card-title">Coordonnées</div>
+          <div class="card-pill">Disponible pour entretien</div>
+        </div>
+        <div>
+          <div class="side-section-title">Contact direct</div>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="contact-label">Téléphone</div>
+              <div class="contact-value">07.83.26.74.21</div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label">E‑mail</div>
+              <div class="contact-value">matheopacheco150@gmail.com</div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label">Adresse</div>
+              <div class="contact-value">260 Rue du Faubourg Croncels, 10000 Troyes</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="side-section-title">Positionnement</div>
+          <div class="tag-row">
+            <span class="tag">Alternance Licence Banque‑Assurance</span>
+            <span class="tag">Conseil & relation client</span>
+            <span class="tag">Grand Est · Troyes / Romilly</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- SECTIONS INFÉRIEURES -->
+    <section class="sections">
+      <div class="section-block">
+        <article class="card reveal" id="experience">
+          <div class="card-header">
+            <div class="card-title">Expériences professionnelles</div>
+            <div class="card-pill">Parcours terrain</div>
+          </div>
+          <div class="section-title-main">Banque & services</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>Stage BTS Banque · 2ᵉ année</span>
+                <span>Nov. – Déc. 2025 · 6 semaines</span>
+              </div>
+              <div class="timeline-role">Stagiaire en agence bancaire</div>
+              <div class="timeline-org">Société Générale Grand Est · Troyes Foch</div>
+              <p class="timeline-desc">
+                Approche des besoins clients, participation à la préparation d’entretiens, contribution à la
+                <strong>qualité de service</strong> et au respect des procédures internes.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>Stage BTS Banque · 1ʳᵉ année</span>
+                <span>Mai – Juil. 2025 · 8 semaines</span>
+              </div>
+              <div class="timeline-role">Stagiaire en agence bancaire</div>
+              <div class="timeline-org">Société Générale Grand Est · Troyes Foch</div>
+              <p class="timeline-desc">
+                Immersion dans le fonctionnement d’une agence, découverte des <strong>processus de gestion de
+                comptes</strong>, de la relation client et de la conformité.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>Stage BTS Banque · 1ʳᵉ année</span>
+                <span>Janv. 2025 · 2 semaines</span>
+              </div>
+              <div class="timeline-role">Découverte de l’agence</div>
+              <div class="timeline-org">Société Générale Grand Est · Troyes Foch</div>
+              <p class="timeline-desc">
+                Première approche du métier, observation des <strong>entretiens de conseil</strong>, accueil et
+                orientation des clients.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>Agent SNCF · Intérim</span>
+                <span>Juil. – Août 2025 · 5 semaines</span>
+              </div>
+              <div class="timeline-role">Agent SNCF</div>
+              <div class="timeline-org">Technicentre SNCF · Romilly‑sur‑Seine</div>
+              <p class="timeline-desc">
+                Travail en environnement industriel exigeant, respect des procédures, <strong>rigueur</strong> et
+                coordination avec des équipes pluridisciplinaires.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>Vente alimentaire</span>
+                <span>Juin – Juil. 2024</span>
+              </div>
+              <div class="timeline-role">Vendeur</div>
+              <div class="timeline-org">Dreams Donuts · Romilly‑sur‑Seine</div>
+              <p class="timeline-desc">
+                Accueil client, gestion de caisse, <strong>vente conseil</strong> et adaptation à un flux client
+                important.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" id="formation">
+          <div class="card-header">
+            <div class="card-title">Formation</div>
+            <div class="card-pill">Parcours académique</div>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>BTS Banque</span>
+                <span>2024 – 2026</span>
+              </div>
+              <div class="timeline-role">BTS Banque</div>
+              <div class="timeline-org">Lycée Chrestien de Troyes · Troyes</div>
+              <p class="timeline-desc">
+                Formation orientée <strong>conseil et relation client</strong>, produits bancaires, analyse des
+                besoins et environnement réglementaire.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>CPGE TSI · 1ʳᵉ année</span>
+                <span>2023 – 2024</span>
+              </div>
+              <div class="timeline-role">Classe préparatoire TSI</div>
+              <div class="timeline-org">Lycée Les Lombards · Troyes</div>
+              <p class="timeline-desc">
+                Développement de la <strong>méthode de travail</strong>, de la capacité d’analyse et de la
+                persévérance.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-meta">
+                <span>Baccalauréat technologique STI2D</span>
+                <span>2023</span>
+              </div>
+              <div class="timeline-role">Bac STI2D</div>
+              <div class="timeline-org">Lycée Joliot‑Curie · Romilly‑sur‑Seine</div>
+              <p class="timeline-desc">
+                Approche technologique, travail en projet, <strong>rigueur</strong> et esprit d’équipe.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-block">
+        <article class="card reveal" id="competences">
+          <div class="card-header">
+            <div class="card-title">Compétences & qualités</div>
+            <div class="card-pill">Profil opérationnel</div>
+          </div>
+          <div class="section-title-main">Compétences</div>
+          <div class="chips-grid">
+            <span class="chip chip-strong">
+              <span class="chip-dot"></span>
+              Certification Pix
+            </span>
+            <span class="chip">
+              <span class="chip-dot"></span>
+              Permis B · mobilité
+            </span>
+            <span class="chip">
+              <span class="chip-dot"></span>
+              Outils numériques & bureautique
+            </span>
+            <span class="chip">
+              <span class="chip-dot"></span>
+              Sens du service client
+            </span>
+          </div>
+          <div class="section-title-main" style="margin-top:8px;">Qualités</div>
+          <div class="chips-grid">
+            <span class="chip chip-strong">
+              <span class="chip-dot"></span>
+              Organisé
+            </span>
+            <span class="chip chip-strong">
+              <span class="chip-dot"></span>
+              Curieux
+            </span>
+            <span class="chip chip-strong">
+              <span class="chip-dot"></span>
+              Bon contact client
+            </span>
+            <span class="chip chip-strong">
+              <span class="chip-dot"></span>
+              Motivé & impliqué
+            </span>
+          </div>
+          <div class="section-title-main" style="margin-top:8px;">Langues</div>
+          <div class="chips-grid">
+            <span class="chip">
+              <span class="chip-dot"></span>
+              Anglais · niveau scolaire
+            </span>
+            <span class="chip">
+              <span class="chip-dot"></span>
+              Espagnol · niveau scolaire
+            </span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-header">
+            <div class="card-title">Engagement & loisirs</div>
+            <div class="card-pill">Esprit d’équipe</div>
+          </div>
+          <div class="section-title-main">Responsabilités & sports</div>
+          <div class="badge-grid">
+            <div class="badge-item">
+              <span>Dirigeant dans une association sportive · Romilly Champagne Football Club</span>
+              <span class="badge-tag">Leadership</span>
+            </div>
+            <div class="badge-item">
+              <span>Ancien coach d’une équipe de football niveau R2</span>
+              <span class="badge-tag">Management</span>
+            </div>
+            <div class="badge-item">
+              <span>Ancien pratiquant de tennis (classé 30)</span>
+              <span class="badge-tag">Persévérance</span>
+            </div>
+            <div class="badge-item">
+              <span>Joueur de badminton (niveau départemental)</span>
+              <span class="badge-tag">Compétition</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" id="recruteur">
+          <div class="card-header">
+            <div class="card-title">Synthèse pour recruteur</div>
+            <div class="card-pill">Vue en 10 secondes</div>
+          </div>
+          <p class="motivation-text">
+            <strong>Objectif :</strong> Alternance en Licence Banque‑Assurance (rentrée 2026‑2027), avec une
+            spécialisation relation client et conseil.
+          </p>
+          <p class="motivation-text">
+            <strong>Expérience clé :</strong> 3 stages à la <strong>Société Générale Troyes Foch</strong>, immersion
+            en agence, compréhension des besoins clients, rigueur dans l’application des procédures.
+          </p>
+          <p class="motivation-text">
+            <strong>Soft skills :</strong> organisation, curiosité, sens du contact, leadership associatif (dirigeant
+            & ancien coach).
+          </p>
+          <p class="motivation-text">
+            <strong>Valeur ajoutée :</strong> profil jeune, déjà confronté au terrain, capable de s’intégrer
+            rapidement et de représenter l’image de l’établissement auprès des clients.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-pill">
+        <span class="footer-dot"></span>
+        Portfolio Banque & Assurance · Mathéo Pacheco‑Corvo
+      </div>
+      <div>
+        Contact : <strong>matheopacheco150@gmail.com</strong> · 07.83.26.74.21
+      </div>
+    </footer>
   </div>
-  <div class="sidebar-bottom">
-    Alternance visée : <strong>Licence Banque‑Assurance 2026 / 2027</strong><br>
-    Basé à Troyes · mobilité Romilly‑sur‑Seine & Grand Est.
-  </div>
-</aside>
 
-<!-- MAIN -->
-<main>
-  <!-- HERO -->
-  <section id="hero" class="hero reveal">
-    <div class="hero-left">
-      <div class="hero-kicker">Alternance Banque‑Assurance 2026 / 2027</div>
-      <h1 class="hero-title">
-        Un profil <span>rigoureux</span> et <span>orienté client</span> pour votre agence.
-      </h1>
-      <p class="hero-sub">
-        Étudiant en <strong>2ᵉ année de BTS Banque</strong> à Troyes, je souhaite poursuivre en Licence
-        Banque‑Assurance en alternance afin de mettre à profit mes expériences en agence, mon sens du
-        relationnel et ma capacité d'adaptation au service de vos clients.
-      </p>
-      <div class="typing" id="typing"></div>
+  <script>
+    // Typewriter
+    const typewriterElement = document.getElementById("typewriter");
+    const typewriterTexts = [
+      "Futur conseiller Banque‑Assurance en alternance",
+      "Orienté relation client & qualité de service",
+      "Rigoureux, curieux et engagé sur le terrain"
+    ];
+    let twIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
 
-      <div class="hero-tags">
-        <span class="tag tag-accent">BTS Banque – Lycée Chrestien de Troyes</span>
-        <span class="tag">Stages Société Générale Troyes Foch</span>
-        <span class="tag">Expérience SNCF Technicentre Romilly</span>
-        <span class="tag">Dirigeant & ancien coach de football</span>
-      </div>
-
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Proposer une alternance <span>→</span></a>
-        <a href="#experiences" class="btn btn-ghost">Voir mon parcours</a>
-      </div>
-
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Localisation</span>
-          <span class="hero-meta-value">Troyes & Romilly‑sur‑Seine (Grand Est)</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Disponibilité</span>
-          <span class="hero-meta-value">Rentrée 2026 – rythme à définir</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Contact direct</span>
-          <span class="hero-meta-value">07.83.26.74.21 · matheopacheco150@gmail.com</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="profile-card" id="profile-card">
-        <div class="profile-glow"></div>
-        <div class="profile-dot"></div>
-
-        <div class="profile-header">
-          <div class="avatar">M</div>
-          <div class="profile-info">
-            <h2>Mathéo Pacheco‑Corvo</h2>
-            <p>Futur alternant Licence Banque‑Assurance · Relation client & rigueur opérationnelle</p>
-            <div class="profile-pill">
-              <span class="profile-pill-dot"></span>
-              <span>Ouvert aux opportunités en agence bancaire</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-grid">
-          <div class="profile-stat">
-            <div class="profile-stat-label">Expérience bancaire</div>
-            <div class="profile-stat-value" data-counter="16">0 semaines</div>
-            <div style="font-size:0.72rem;color:var(--text-dim);">
-              Stages en agence Société Générale Troyes Foch (1ʳᵉ & 2ᵉ année BTS).
-            </div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-label">Polyvalence</div>
-            <div class="profile-stat-value">Banque · SNCF · Vente</div>
-            <div style="font-size:0.72rem;color:var(--text-dim);">
-              Environnements variés, culture du terrain et du service.
-            </div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-label">Soft skills</div>
-            <div class="profile-stat-value">Organisé & curieux</div>
-            <div style="font-size:0.72rem;color:var(--text-dim);">
-              Bon contact client, sens du collectif, adaptabilité.
-            </div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-label">Engagement</div>
-            <div class="profile-stat-value">Dirigeant associatif</div>
-            <div style="font-size:0.72rem;color:var(--text-dim);">
-              Romilly Champagne Football Club · ancien coach niveau R2.
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-footer">
-          <span>Certification <strong>Pix</strong> · Permis <strong>B</strong> · Anglais & Espagnol niveau scolaire</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- À PROPOS -->
-  <section id="apropos" class="reveal">
-    <div class="section-header">
-      <h2 class="section-title">À propos</h2>
-      <p class="section-sub">
-        Un parcours construit entre technique, relation client et engagement associatif, avec un objectif clair :
-        évoluer dans la banque et l'assurance en accompagnant les clients avec sérieux, pédagogie et proximité.
-      </p>
-    </div>
-
-    <div class="grid">
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Vision</div>
-          <h3 class="card-title">Accompagner dans la durée</h3>
-          <p class="card-meta">
-            Construire une relation de confiance avec chaque client, en expliquant clairement les solutions proposées.
-          </p>
-          <ul class="card-list">
-            <li>Écoute active et reformulation des besoins.</li>
-            <li>Explication pédagogique des produits.</li>
-            <li>Suivi régulier et sérieux des dossiers.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Profil</div>
-          <h3 class="card-title">Terrain & structuré</h3>
-          <p class="card-meta">
-            <strong>Banque, SNCF, vente, sport</strong> : des environnements exigeants qui m'ont appris la rigueur et le sens du service.
-          </p>
-          <ul class="card-list">
-            <li>Intégration rapide dans une équipe.</li>
-            <li>Aisance à l'oral avec les clients.</li>
-            <li>Gestion des imprévus avec calme.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Objectif</div>
-          <h3 class="card-title">Réussir ma Licence en alternance</h3>
-          <p class="card-meta">
-            Mettre mon énergie au service d'une agence pour <strong>apprendre</strong> et <strong>performer</strong>.
-          </p>
-          <ul class="card-list">
-            <li>Monter en compétence sur les produits Banque & Assurance.</li>
-            <li>Gagner en autonomie sur un portefeuille clients.</li>
-            <li>Être un relais fiable pour l'équipe.</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- EXPÉRIENCES -->
-  <section id="experiences" class="reveal">
-    <div class="section-header">
-      <h2 class="section-title">Expériences</h2>
-      <p class="section-sub">
-        Des expériences complémentaires qui m'ont permis de développer un sens aigu du service, de la rigueur
-        opérationnelle et de la relation client, en particulier en agence bancaire.
-      </p>
-    </div>
-
-    <div class="grid">
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Banque</div>
-          <h3 class="card-title">Stagiaire BTS Banque – 2ᵉ année</h3>
-          <p class="card-meta">
-            Société Générale Grand Est · Troyes Foch · <strong>Nov–Déc 2025 (6 semaines)</strong>
-          </p>
-          <ul class="card-list">
-            <li>Accueil et orientation des clients.</li>
-            <li>Participation aux entretiens de conseil.</li>
-            <li>Préparation de dossiers clients.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Banque</div>
-          <h3 class="card-title">Stagiaire BTS Banque – 1ʳᵉ année</h3>
-          <p class="card-meta">
-            Société Générale Grand Est · Troyes Foch · <strong>Mai–Juil 2025 (8 sem.) & Janv 2025 (2 sem.)</strong>
-          </p>
-          <ul class="card-list">
-            <li>Observation des missions quotidiennes d'agence.</li>
-            <li>Gestion de la relation client au guichet.</li>
-            <li>Appropriation des process et de la conformité.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Industrie & mobilité</div>
-          <h3 class="card-title">Agent SNCF – Intérim</h3>
-          <p class="card-meta">
-            Technicentre SNCF · Romilly‑sur‑Seine · <strong>Juil–Août 2025 (5 semaines)</strong>
-          </p>
-          <ul class="card-list">
-            <li>Respect strict des procédures.</li>
-            <li>Travail en équipe sur le terrain.</li>
-            <li>Gestion des contraintes de sécurité.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Vente</div>
-          <h3 class="card-title">Vente alimentaire</h3>
-          <p class="card-meta">
-            Dreams Donuts · Romilly‑sur‑Seine · <strong>Juin–Juil 2024</strong>
-          </p>
-          <ul class="card-list">
-            <li>Accueil, conseil et encaissement.</li>
-            <li>Gestion des flux en période d'affluence.</li>
-            <li>Première expérience concrète de la relation client.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Engagement</div>
-          <h3 class="card-title">Dirigeant & ancien coach</h3>
-          <p class="card-meta">
-            Romilly Champagne Football Club · Niveau R2
-          </p>
-          <ul class="card-list">
-            <li>Encadrement d'équipe et gestion de groupe.</li>
-            <li>Organisation et communication régulière.</li>
-            <li>Leadership et sens des responsabilités.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-label">Sport</div>
-          <h3 class="card-title">Pratique sportive</h3>
-          <p class="card-meta">
-            Tennis (classé 30) · Badminton (classé départemental)
-          </p>
-          <ul class="card-list">
-            <li>Persévérance et discipline.</li>
-            <li>Gestion de la pression.</li>
-            <li>Esprit de compétition sain.</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- FORMATIONS -->
-  <section id="formations" class="reveal">
-    <div class="section-header">
-      <h2 class="section-title">Formations</h2>
-      <p class="section-sub">
-        Un parcours progressif, du bac technologique à la filière Banque, avec une volonté constante de monter
-        en compétence et de professionnaliser mon projet.
-      </p>
-    </div>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <h3 class="timeline-title">BTS Banque</h3>
-        <p class="timeline-meta">
-          Lycée Chrestien de Troyes · Troyes · <strong>2024 – 2026</strong>
-        </p>
-        <p class="timeline-desc">
-          Formation centrée sur la relation client, les produits bancaires, la réglementation et la gestion des
-          opérations en agence.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <h3 class="timeline-title">1ʳᵉ année CPGE TSI</h3>
-        <p class="timeline-meta">
-          Lycée Les Lombards · Troyes · <strong>2023 – 2024</strong>
-        </p>
-        <p class="timeline-desc">
-          Année en classe préparatoire scientifique, développant rigueur, capacité de travail et logique analytique.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <h3 class="timeline-title">Baccalauréat technologique STI2D</h3>
-        <p class="timeline-meta">
-          Lycée Joliot Curie · Romilly‑sur‑Seine · <strong>2023 – 2024</strong>
-        </p>
-        <p class="timeline-desc">
-          Approche technologique et scientifique, avec une forte dimension projet et travail en équipe.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPÉTENCES -->
-  <section id="competences" class="reveal">
-    <div class="section-header">
-      <h2 class="section-title">Compétences</h2>
-      <p class="section-sub">
-        Un socle de compétences techniques et humaines, directement mobilisables en agence pour contribuer à la
-        satisfaction et à la fidélisation des clients.
-      </p>
-    </div>
-
-    <div class="skills-grid">
-      <div class="skill-pill">
-        <div class="skill-label">Relation client</div>
-        <div class="skill-main">Écoute & accompagnement</div>
-        <div class="skill-note">Accueil, compréhension des besoins, reformulation, suivi.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="90"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-pill">
-        <div class="skill-label">Organisation</div>
-        <div class="skill-main">Rigueur & fiabilité</div>
-        <div class="skill-note">Respect des procédures, gestion des priorités, sérieux.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="88"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-pill">
-        <div class="skill-label">Engagement</div>
-        <div class="skill-main">Motivation & curiosité</div>
-        <div class="skill-note">Envie d'apprendre et de progresser en continu.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="95"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-pill">
-        <div class="skill-label">Digital</div>
-        <div class="skill-main">Certification Pix</div>
-        <div class="skill-note">Maîtrise des outils numériques et bureautiques.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="85"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-pill">
-        <div class="skill-label">Mobilité</div>
-        <div class="skill-main">Permis B</div>
-        <div class="skill-note">Déplacements faciles entre agences ou sites.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="100"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-pill">
-        <div class="skill-label">Langues</div>
-        <div class="skill-main">Anglais & Espagnol</div>
-        <div class="skill-note">Niveau scolaire, bases solides pour progresser.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="70"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-pill">
-        <div class="skill-label">Soft skills</div>
-        <div class="skill-main">Esprit d'équipe & leadership</div>
-        <div class="skill-note">Développés via le sport, le coaching et l'associatif.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="92"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-pill">
-        <div class="skill-label">Adaptabilité</div>
-        <div class="skill-main">Polyvalence des environnements</div>
-        <div class="skill-note">Banque, SNCF, vente, sport : ajustement rapide.</div>
-        <div class="skill-bar">
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill" data-skill="93"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="reveal">
-    <div class="section-header">
-      <h2 class="section-title">Contact & alternance</h2>
-      <p class="section-sub">
-        Intégrer votre équipe serait pour moi une opportunité de progresser aux côtés de professionnels
-        expérimentés, tout en contribuant concrètement à vos objectifs et à la satisfaction de vos clients.
-      </p>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-text">
-        <p><strong>Discutons de votre besoin en alternant.</strong></p>
-        <p>
-          Je suis disponible pour un entretien afin d'échanger sur vos attentes, le rythme d'alternance et la
-          manière dont je peux m'intégrer à votre agence.
-        </p>
-        <div class="contact-details">
-          <span><strong>Téléphone :</strong> 07.83.26.74.21</span><br>
-          <span><strong>Email :</strong> matheopacheco150@gmail.com</span><br>
-          <span><strong>Basé à :</strong> Troyes · mobilité Romilly‑sur‑Seine et Grand Est</span>
-        </div>
-      </div>
-
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Sur un site en production, ce formulaire enverrait un email ou enregistrerait une demande de contact.');">
-        <div class="field">
-          <label for="nom">Nom & prénom</label>
-          <input id="nom" type="text" placeholder="Nom du recruteur / de l'agence" required>
-        </div>
-        <div class="field">
-          <label for="email">Email professionnel</label>
-          <input id="email" type="email" placeholder="exemple@banque.fr" required>
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" placeholder="Expliquez votre besoin en alternant, vos attentes, vos dates..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-top:4px;width:max-content;">
-          Envoyer une intention de contact
-        </button>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <span>Portfolio cyberpunk conçu pour mettre en valeur un profil d'<strong>alternant Banque‑Assurance</strong> complet et engagé.</span>
-    <span>Dernière mise à jour : <strong>2026</strong> · Version néon / futuriste.</span>
-  </footer>
-</main>
-
-<script>
-// Particules
-const particlesContainer = document.getElementById("particles");
-const particleCount = 40;
-for (let i = 0; i < particleCount; i++) {
-  const p = document.createElement("div");
-  p.className = "particle";
-  const size = Math.random() * 3 + 2;
-  p.style.width = size + "px";
-  p.style.height = size + "px";
-  p.style.left = Math.random() * 100 + "%";
-  p.style.bottom = Math.random() * 100 + "px";
-  p.style.animationDuration = 14 + Math.random() * 10 + "s";
-  p.style.animationDelay = -Math.random() * 20 + "s";
-  particlesContainer.appendChild(p);
-}
-
-// Scroll reveal
-const reveals = document.querySelectorAll(".reveal");
-function handleScrollReveal() {
-  const triggerBottom = window.innerHeight * 0.85;
-  reveals.forEach((el, index) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < triggerBottom) {
-      setTimeout(() => el.classList.add("visible"), index * 80);
+    function typewriterTick() {
+      const current = typewriterTexts[twIndex];
+      if (!deleting) {
+        charIndex++;
+        if (charIndex === current.length + 3) {
+          deleting = true;
+          setTimeout(typewriterTick, 900);
+          typewriterElement.textContent = current;
+          return;
+        }
+      } else {
+        charIndex--;
+        if (charIndex === 0) {
+          deleting = false;
+          twIndex = (twIndex + 1) % typewriterTexts.length;
+        }
+      }
+      typewriterElement.textContent = current.substring(0, charIndex);
+      const delay = deleting ? 40 : 70;
+      setTimeout(typewriterTick, delay);
     }
-  });
-}
-window.addEventListener("scroll", handleScrollReveal);
-window.addEventListener("load", handleScrollReveal);
+    typewriterTick();
 
-// Smooth scroll
-document.querySelectorAll('.nav a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", e => {
-    const id = anchor.getAttribute("href").substring(1);
-    const target = document.getElementById(id);
-    if (target) {
-      e.preventDefault();
-      window.scrollTo({top: target.offsetTop - 40, behavior: "smooth"});
-    }
-  });
-});
-
-// Typing effect
-const typingElement = document.getElementById("typing");
-const typingTexts = [
-  "Relation client, rigueur et engagement associatif au service de votre agence.",
-  "Objectif : réussir ma Licence Banque‑Assurance en alternance et devenir un conseiller de confiance.",
-  "Banque, SNCF, vente, sport : un profil polyvalent, orienté performance collective."
-];
-let typingIndex = 0;
-let charIndex = 0;
-let typingForward = true;
-
-function type() {
-  const currentText = typingTexts[typingIndex];
-  if (typingForward) {
-    charIndex++;
-    if (charIndex === currentText.length + 5) {
-      typingForward = false;
-      setTimeout(type, 900);
-      return;
-    }
-  } else {
-    charIndex--;
-    if (charIndex === 0) {
-      typingForward = true;
-      typingIndex = (typingIndex + 1) % typingTexts.length;
-    }
-  }
-  typingElement.textContent = currentText.substring(0, charIndex);
-  setTimeout(type, typingForward ? 40 : 25);
-}
-window.addEventListener("load", () => setTimeout(type, 600));
-
-// Counter expérience bancaire
-const counterElement = document.querySelector("[data-counter]");
-let counterStarted = false;
-function animateCounter() {
-  if (!counterElement || counterStarted) return;
-  const rect = counterElement.getBoundingClientRect();
-  if (rect.top < window.innerHeight * 0.8) {
-    counterStarted = true;
-    const target = parseInt(counterElement.getAttribute("data-counter"), 10);
-    let current = 0;
-    const duration = 1200;
-    const startTime = performance.now();
-    function update(now) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      current = Math.floor(progress * target);
-      counterElement.textContent = current + " semaines";
-      if (progress < 1) requestAnimationFrame(update);
-      else counterElement.textContent = target + " semaines";
-    }
-    requestAnimationFrame(update);
-  }
-}
-window.addEventListener("scroll", animateCounter);
-window.addEventListener("load", animateCounter);
-
-// Skills bars
-const skillBars = document.querySelectorAll(".skill-bar-fill");
-let skillsStarted = false;
-function animateSkills() {
-  if (skillsStarted) return;
-  const anyVisible = Array.from(skillBars).some(bar => {
-    const rect = bar.getBoundingClientRect();
-    return rect.top < window.innerHeight * 0.85;
-  });
-  if (anyVisible) {
-    skillsStarted = true;
-    skillBars.forEach(bar => {
-      const val = bar.getAttribute("data-skill");
-      bar.style.width = val + "%";
-    });
-  }
-}
-window.addEventListener("scroll", animateSkills);
-window.addEventListener("load", animateSkills);
-
-// Tilt léger sur la carte profil
-const profileCard = document.getElementById("profile-card");
-if (profileCard) {
-  profileCard.addEventListener("mousemove", e => {
-    const rect = profileCard.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * 6;
-    const rotateY = ((x - centerX) / centerX) * -6;
-    profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-  });
-  profileCard.addEventListener("mouseleave", () => {
-    profileCard.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0)";
-  });
-}
-</script>
+    // Scroll reveal
+    const revealElements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealElements.forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
