@@ -1307,6 +1307,25 @@
     border-radius: inherit;
     object-fit: cover;
 }
+        /* Centrage parfait du cadre avatar */
+.hero-avatar-inner.profile-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* La photo remplit le cadre sans déformer */
+.hero-avatar-inner.profile-visual img.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: inherit;
+}
+
+/* Cache le MP quand la photo est chargée */
+.profile-photo[src] + .profile-initials {
+    display: none;
+}
     </style>
 </head>
 <body>
